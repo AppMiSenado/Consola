@@ -1,0 +1,127 @@
+<app-navbar></app-navbar>
+<section class="container">
+	<div class="row">
+		<article class="col-sm-2">
+			<app-sidebar></app-sidebar>
+		</article>
+
+		<div class="spinner" *ngIf="loading">
+			<div class="rect1"></div>
+			<div class="rect2"></div>
+			<div class="rect3"></div>
+			<div class="rect4"></div>
+			<div class="rect5"></div>
+		</div>
+
+		<article class="col-sm-10 contenedorScroll" *ngIf="!loading">
+			<div class="col-sm-12 row">
+				<div class="title col-sm-12">Sondeos Resultados</div>
+				<div class="col-sm-12 text-right" style="margin-bottom: 10px;">
+					<button type="button" class="btn btn-accepted btn-xs" [routerLink]="['/probe']">Regresar</button>
+				</div>
+
+			</div>
+
+
+			<div class="row">
+				<div class="col-sm-8">
+
+					<div class="white-bg sroll" style="height: 300px;">
+						<div class="col-sm-12 text-center">
+							<br>
+							<p>Votaciones de la Ciudadanía</p>
+						</div>
+						<div id="voteDate" [style.width.%]="100" [style.height.px]="250"></div>
+					</div>
+
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-12 white-bg">
+								<div class="col-sm-4">
+									<div id="departament" [style.width.%]="100" [style.height.px]="180">
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div id="gender" [style.width.%]="100" [style.height.px]="180">
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div id="age" [style.width.%]="100" [style.height.px]="180">
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="white-bg">
+						<div class="text-center" [style.height.px]="100" [style.padding-top.%]="8">
+							<h1 *ngIf="probe">{{probe[0].votes_total}}</h1>
+							<p>Total de Votos</p>
+						</div>
+					</div>
+					<br>
+					<div class="col-sm-12 white-bg scroll" style="height: 180px;">
+						<br>
+						<div class="form" *ngIf="probe">
+							<div class="form-group">
+								<label>Pregunta</label>
+								<div>
+									{{probe[0].title}}
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Descripción</label>
+								<div>
+									{{probe[0].description}}
+								</div>
+							</div>
+							<div class="form-group" *ngIf="probe[0].link">
+								<label>
+									<i class="icon-link button" aria-hidden="true"></i> Enlace</label>
+								<div>
+									<a href="{{probe[0].link}}" target="_blank">{{probe[0].link}}</a>
+								</div>
+							</div>
+
+						</div>
+						<br>
+					</div>
+
+					<!-- <div class="row"> -->
+					<div class="white-bg" style="height: 178px;position: absolute;bottom: -200px; width: 94%;">
+						<div class="col-sm-6">
+							<div id="female" [style.width.%]="100" [style.height.px]="180">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div id="male" [style.width.%]="100" [style.height.px]="180">
+							</div>
+						</div>
+					</div>
+					<!-- </div> -->
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="white-bg" style="height: 300px;">
+						<div id="departamens" [style.width.%]="100" [style.height.px]="295">
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="white-bg">
+						<div id="ages" [style.width.%]="100" [style.height.px]="250">
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</div>
+</section>

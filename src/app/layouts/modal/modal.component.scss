@@ -1,0 +1,51 @@
+@import "./../../app.component";
+
+.modal-header{
+  background-color: $gold;
+  color           : white;
+  font-weight     : bold;
+}
+
+iframe{
+  border: 0;
+}
+
+#modal-password{
+
+	p{
+		font-size: 1.5em;
+		margin: 0;
+	}
+
+	.modal-content{
+
+		.form{
+			padding-top: 2em;
+		}
+
+		.form-body{
+			width    : 70%;
+			margin   : auto; 
+		}
+	}
+}
+
+#modal-reset-password{
+
+	p{
+		font-size: 1.5em;
+		margin: 0;
+	}
+
+	.modal-content{
+
+		.form{
+			padding-top: 2em;
+		}
+
+		.form-body{
+			width    : 70%;
+			margin   : auto; 
+		}
+	}
+}

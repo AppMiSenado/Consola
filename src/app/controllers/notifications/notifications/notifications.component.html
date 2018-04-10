@@ -1,0 +1,232 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <in-plenary></in-plenary>
+  <div class="module">
+    <section class="container pr-5">
+      <div class="row">
+        <article class="col-sm-2">
+          <app-sidebar></app-sidebar>
+        </article>
+
+        <article class="col-sm-10">
+          <div class="row">
+            <article class="col-sm-5 shadow-1">
+
+              <div class="top-bar-noti">
+                <button class="btn btn-accepted btn-xs" (click)="fadeIn('notifications')">
+                  Componer
+                </button>
+                <button class="btn btn-accepted btn-xs" [disabled]="notificationsToStorage.length == 0" (click)="archiveNotification()">
+                  <i class="fa fa-archive" aria-hidden="true"></i> Archivar
+                </button>
+              </div>
+
+
+
+              <!-- TABS -->
+              <div class="mt-5">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active">
+                    <a href="#entrada" aria-controls="entrada" role="tab" data-toggle="tab">Bandeja de entrada</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#archivado" aria-controls="archivado" role="tab" data-toggle="tab">Archivados</a>
+                  </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content heigth-table" [style.margin-top.em]="1.2" style="position:relative" infiniteScroll [infiniteScrollDistance]="2"
+                  [infiniteScrollThrottle]="1000" [scrollWindow]="false" [infiniteScrollUpDistance]="1.5" (scrolled)="onScrollDown()">
+                  <div role="tabpanel" class="tab-pane active" id="entrada">
+
+                    <div class="top-bar-noti" *ngIf="!loading" style="float:right;margin-bottom:25px;">
+                      <div class="search bg-white">
+                        <div class="item-group">
+                          <span class="item-addon">
+                            <i aria-hidden="true" class="fa fa-search"></i>
+                          </span>
+                          <input type="text" class="bg-white" [(ngModel)]="searchInbox" (keyup)="searchInboxNotifications()">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="spinner" *ngIf="loading" style="z-index:9999; position:absolute; left: 44%;">
+                      <div class="rect1"></div>
+                      <div class="rect2"></div>
+                      <div class="rect3"></div>
+                      <div class="rect4"></div>
+                      <div class="rect5"></div>
+                    </div>
+
+                    <article class="box-list">
+                      <ul class="lista">
+                        <li *ngFor="let n of inbox; let i= index" [ngClass]="{'active-notification': n.checked}">
+                          <div class="row">
+                            <article class="col-xs-2">
+                              <div class="box-check">
+                                <input type="checkbox" id="cbtest{{i}}" [checked]="n.checked" [(ngModel)]="n.checked" (change)="storageNotifications(n)">
+                                <label for="cbtest{{i}}" class="check-box"></label>
+                              </div>
+                            </article>
+                            <div (click)="notificationSelected = n; getNotificationDetail()">
+                              <article class="col-xs-2">
+                                <div class="box-icon">
+                                  <i class="icon-check" aria-hidden="true" *ngIf="n.notification.schedule == null"></i>
+                                  <i class="icon-calendar" *ngIf="n.notification.schedule !== null"></i>
+                                </div>
+                              </article>
+                              <article class="col-xs-5">
+                                <h3>{{n.notification.title}}</h3>
+                                <p>
+                                  {{n.notification.message | slice:0: 140}}
+                                  <span *ngIf="n.notification.message.length > 140">...</span>
+                                </p>
+                              </article>
+                              <article class="col-xs-3">
+                                <div style="text-align: right;">
+                                  {{n.notification.start_at |fromNow}}
+                                </div>
+                              </article>
+                            </div>
+
+                          </div>
+                        </li>
+                      </ul>
+                    </article>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane" id="archivado">
+
+                    <div class="top-bar-noti" *ngIf="!loading" style="float:right;margin-bottom:25px;">
+                      <div class="search bg-white">
+                        <div class="item-group">
+                          <span class="item-addon">
+                            <i aria-hidden="true" class="fa fa-search"></i>
+                          </span>
+                          <input type="text" class="bg-white" [(ngModel)]="searchStorage" (keyup)="searchInboxNotificationsStorage()">
+                        </div>
+                      </div>
+                    </div>
+
+                    <article class="box-list">
+                      <ul class="lista">
+                        <li *ngFor="let n of storage; let i= index" [ngClass]="{'active-notification': n.checked}">
+                          <div class="row">
+                            <div (click)="notificationSelected = n; getNotificationDetail()">
+                              <article class="col-xs-2">
+                                <div class="box-icon">
+                                  <i class="icon-check" aria-hidden="true" *ngIf="n.notification.schedule == null"></i>
+                                  <i class="icon-calendar" *ngIf="n.notification.schedule !== null"></i>
+                                </div>
+                              </article>
+                              <article class="col-xs-5">
+                                <h3>{{n.notification.title}}</h3>
+                                <p>
+                                  {{n.notification.message | slice:0: 140}}
+                                  <span *ngIf="n.notification.message.length > 140">...</span>
+                                </p>
+                              </article>
+                              <article class="col-xs-3">
+                                <div style="text-align: right;">
+                                  {{n.notification.start_at |fromNow}}
+                                </div>
+                              </article>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </article>
+                  </div>
+                </div>
+
+              </div>
+
+            </article>
+
+            <article class="col-sm-7 heigth-left">
+              <div class="spinner" *ngIf="loading2">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+              </div>
+
+
+              <div *ngIf="notificationDetail">
+
+                <div class="row">
+                  <article class="col-xs-6 text-left">
+                    <h2>{{notificationDetail.notification.title}}</h2>
+                  </article>
+                  <article class="col-xs-6 text-right">
+                    <button class="btn btn-accepted btn-xs" (click)="resend(notificationDetail.id)" style="font-size:12px;margin-top: 10px;">
+                      Reenviar a partir de esta notificación
+                      <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </button>
+                  </article>
+                </div>
+
+                <hr class="hr-separator">
+                <div class="row">
+                  <article class="col-sm-6">
+                    <ul class="list-inline">
+                      <li>
+                        <i class="icon-check" aria-hidden="true" *ngIf="notificationDetail.notification.schedule == null"></i>
+                        <i class="icon-calendar" *ngIf="notificationDetail.notification.schedule !== null"></i>
+                      </li>
+                      <li>
+                        <h3 *ngIf="notificationDetail.notification.schedule == null">Notificación Inmediata</h3>
+                        <h3 *ngIf="notificationDetail.notification.schedule !== null">Notificación Programada</h3>
+                      </li>
+                    </ul>
+                  </article>
+                  <article class="col-sm-6">
+                    <h3 class="text-right">
+                      {{notificationDetail.notification.start_at | fromNow}}
+                    </h3>
+                  </article>
+                </div>
+
+                <hr class="hr-separator">
+
+                <p>
+                  {{notificationDetail.notification.message}}
+                </p>
+
+                <!-- <h4 class="text-right">
+                  <a [href]="notificationSelected.enlace" target="_blank">
+                    <i class="icon-link"></i> Enlace</a>
+                </h4> -->
+
+                <hr class="hr-separator">
+
+                <div class="row">
+                  <article class="col-sm-7">
+                    <h3 class="text-center">
+                      <i class="icon-info"></i> Estadísticas de entrega
+                    </h3>
+                    <div id="chartdiv" [style.width.%]="100" [style.height.px]="300"></div>
+                  </article>
+                  <article class="col-sm-5">
+                    <h3 class="text-center">
+                      Estadísticas de conversión
+                    </h3>
+
+                    <div id="chartdiv2" [style.width.%]="100" [style.height.px]="300"></div>
+
+                  </article>
+                </div>
+              </div>
+
+            </article>
+          </div>
+        </article>
+      </div>
+
+    </section>
+  </div>
+</div>
+
+<app-composer></app-composer>

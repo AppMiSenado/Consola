@@ -1,0 +1,66 @@
+@import "../../../app.component";
+
+@font-face {
+    font-family: 'chip';
+    src: url('./font/iconos-senado.eot?67020064');
+    src: url('./font/iconos-senado.eot?67020064#iefix') format('embedded-opentype'),
+         url('./font/iconos-senado.woff2?67020064') format('woff2'),
+         url('./font/iconos-senado.woff?67020064') format('woff'),
+         url('./font/iconos-senado.ttf?67020064') format('truetype'),
+         url('./font/iconos-senado.svg?67020064#iconos-senado') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+$gold       : #B59E54 !default;
+$grey       : #EFEFEF !default;
+$darkgrey   : #555555 !default;
+$background : #FFFFFF !default;
+$black      : #212121 !default;
+
+.chip {
+    display: inline-block;
+    min-height: 32px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    line-height: 32px;
+    padding: 0 12px;
+    border-radius: 16px;
+    background-color: #e4e4e4;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.chip:hover{
+    background-color: $darkgrey;
+    color: $background;
+}
+
+.selected {
+    background-color: $gold;
+    color: $background;
+}
+
+// .selected:after{
+//     font-family: "chip";
+//     font-style: normal;
+//     font-weight: normal;
+//     speak: none;
+//     display: inline-block;
+//     text-decoration: inherit;
+//     width: 1em;
+//     margin-right: .2em;
+//     text-align: center;
+//     content: '\e808';
+// }
+
+.selected:hover{
+    background-color: $gold;
+}
+
+.box-chip{
+    margin-top: 10px;
+}

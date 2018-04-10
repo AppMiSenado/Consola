@@ -1,0 +1,10 @@
+@import "../../../app.component";
+
+.box-curules {
+    width: 70%;
+    margin: 0 auto;
+
+    @media #{$media_1360} {
+      width: 55%;
+    }
+}

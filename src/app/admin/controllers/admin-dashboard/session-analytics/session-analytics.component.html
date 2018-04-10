@@ -1,0 +1,160 @@
+<div class="col-sm-9 text-right title" *ngIf="session.start_at">
+	Sesión - {{ session.start_at | date:"MMMM d, y" }}
+</div>
+<div class="col-sm-9 text-right title" *ngIf="!session.start_at">
+	<i>Seleccione una sesión para ver su información</i>
+</div>
+
+<div class="col-sm-9">
+	<div>
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#votaciones" aria-controls="votaciones" (click)="section = 'votaciones'" role="tab" data-toggle="tab">Votaciones</a>
+			</li>
+			<li role="presentation">
+				<a href="#asistencia" aria-controls="asistencia" (click)="section = 'asistencia'" role="tab" data-toggle="tab">Asistencia</a>
+			</li>
+		</ul>
+	</div>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="votaciones">
+			<ng-container *ngIf="!loadDataVotting">
+				<h4>Seleccione una sesión de plenaria</h4>
+				<div class="spinner" *ngIf="loading">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+
+			</ng-container>
+			<ng-container *ngIf="loadDataVotting">
+				<article class="white-bg" style="height: 350px;overflow:overlay;">
+					<div class="title-analytics">
+						Votos incluyentes de la sesion
+					</div>
+					<div id="chartdiv-projects" [style.width.%]="100" [style.height.px]="800"></div>
+				</article>
+
+				<form action="">
+					<div class="form-group">
+						<label>Proyecto de ley</label>
+						<br>
+						<select (change)="onChangeProjectVoting($event.target.value)" name="project">
+							<option checked value="null"> Seleccionar proyecto</option>
+							<option *ngFor="let item of dataVoting.data; let i = index" [value]="i">{{ item.project.name }}</option>
+						</select>
+					</div>
+				</form>
+				<article class="white-bg col-sm-12">
+					<div class="title-analytics row">
+						Votaciones incluyentes
+					</div>
+					<div class="row">
+						<div class="text-right">
+							<button type="button" class="btn btn-accepted btn-xs" (click)="generateCSVVoting()">
+								<span class="fa fa-download" aria-hidden="true"></span> Descargar</button>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div id="chartdiv-voting" [style.width.%]="100" [style.height.px]="200"></div>
+					</div>
+					<div class="col-sm-6">
+
+						<div align="center" *ngIf="currentProjectVoting.approved && currentProjectVoting.rejected">
+
+							<app-curules-directive [votosPlenaria]="true" [votosPlenariaSenadores]="currentProjectVoting.senators" [red]="true"></app-curules-directive>
+
+						</div>
+					</div>
+				</article>
+				<article class="white-bg col-sm-12">
+					<div class="title-analytics row">
+						Votaciones no incluyentes
+					</div>
+					<div class="col-sm-6">
+						<div id="chartdiv-citizens" [style.width.%]="100" [style.height.px]="200"></div>
+					</div>
+					<div class="col-sm-6">
+						<br>
+						<br>
+						<div align="center" *ngIf="currentProjectVoting.citizens" class="total-votes">
+							<h1>{{ currentProjectVoting.citizens.total }}</h1>
+							<p>votos</p>
+						</div>
+					</div>
+				</article>
+			</ng-container>
+		</div>
+
+		<div role="tabpanel" class="tab-pane" id="asistencia">
+			<ng-container *ngIf="!loadDataAsssitance">
+				<h4>Seleccione una sesión de plenaria</h4>
+				<div class="spinner" *ngIf="loading">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="loadDataAsssitance">
+				<article class="white-bg">
+					<div class="title-analytics">
+						Asistencia durante la sesion
+					</div>
+					<div id="chartdiv-global" [style.width.%]="100" [style.height.px]="250"></div>
+				</article>
+				<form action="">
+					<div class="form-group">
+						<label>Proyecto de ley</label>
+						<br>
+						<select (change)="onChangeProjectAssistance($event.target.value)" name="project">
+							<option checked value="null"> Seleccionar proyecto</option>
+							<option *ngFor="let item of dataAssistance.data; let i = index" [value]="i">{{ item.project.name }}</option>
+						</select>
+					</div>
+				</form>
+				<article class="white-bg col-sm-12">
+					<div class="title-analytics row">
+						Asistencia por proyecto
+					</div>
+					<div class="row">
+						<div class="text-right">
+							<button type="button" class="btn btn-accepted btn-xs" (click)="generateCSVAssistance()">
+								<span class="fa fa-download" aria-hidden="true"></span> Descargar</button>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="col-sm-6 row">
+							<h4>
+								Asistencia general
+							</h4>
+							<div id="chartdiv-project" [style.width.%]="100" [style.height.px]="250"></div>
+						</div>
+						<div class="col-sm-6 row">
+							<h4>
+								Asistencia individual
+							</h4>
+							<app-curules-directive [asistenciaPlenaria]="true" [asistenciaPlenariaSenadores]="currentProjectAsistence.senators" [red]="true"></app-curules-directive>
+						</div>
+					</div>
+				</article>
+
+				<article class="white-bg col-sm-12">
+					<div class="title-analytics row">
+						Asistencia por bancada
+					</div>
+					<div class="col-sm-12">
+						<div class="col-sm-12 row">
+							<div id="chartdiv-party" [style.width.%]="100" [style.height.px]="500"></div>
+						</div>
+					</div>
+				</article>
+			</ng-container>
+		</div>
+	</div>
+</div>

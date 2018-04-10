@@ -1,0 +1,48 @@
+<!-- Categories -->
+<div *ngIf="!search">
+  <article class="box-chip">
+    <div class="chip" *ngFor="let c of categories" (click)="selected(c)" [ngClass]="{'selected': c.selected}">
+      {{c.name}}
+    </div>
+  </article>
+
+  <div class="box-chip text-right" *ngIf="buttons">
+    <button type="button" class="btn btn-cancelled" (click)="reset()">Reset</button>
+    <button type="button" class="btn btn-accepted" (click)="selectAll()">Seleccionar todo</button>
+  </div>
+</div>
+
+
+<!-- Search -->
+<div *ngIf="search">
+
+  <div class="search">
+    <div class="item-group">
+      <span class="item-addon">
+        <i aria-hidden="true" class="fa fa-search"></i>
+      </span>
+      <input type="text" [(ngModel)]="inputSearch" (keyup)="searchCategorie()">
+    </div>
+  </div>
+  
+  <br>
+
+  <div *ngIf="!resultsSearch && showResult == false">
+    <article class="box-chip">
+      <div class="chip" *ngFor="let c of bills" (click)="selectedBills(c)" [ngClass]="{'selected': c.selected}">
+        {{c.name}}
+      </div>
+    </article>
+  </div>
+
+
+  <div *ngIf="resultsSearch && showResult == true">
+    <article class="box-chip">
+      <div class="chip" *ngFor="let c of resultsSearch" (click)="selectedBills(c)" [ngClass]="{'selected': c.selected}">
+        {{c.name}}
+      </div>
+    </article>
+  </div>
+
+
+</div>

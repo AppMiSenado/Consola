@@ -1,0 +1,85 @@
+ <app-navbar></app-navbar>
+
+ <div class="container">
+
+  <div class="module">
+    <section class="container no-plenary">
+      <div class="row">
+        <article class="col-sm-2">
+            <app-sidebar></app-sidebar>
+        </article>
+
+        <div class="body col-sm-10">
+          <div class="title">Agenda</div>
+          <div class="col-sm-8 separator-right calendar">
+            <!-- Calendario -->
+   
+            <div class="toolbar">
+              <div class="col-sm-3 text-left">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-accepted btn-sm" (click)="prevMonth()">
+                    <i class="fa fa-chevron-left icon" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="btn btn-accepted btn-sm" (click)="nextMonth()">
+                    <i class="fa fa-chevron-right icon" aria-hidden="true"></i>
+                  </button>
+               </div>
+              </div>
+              <div class="col-sm-6 text-center">
+                {{ month }}
+              </div>
+              <div class="col-sm-3 text-right">
+                <button type="button" class="btn btn-accepted btn-sm" (click)="today()">
+                  <i class="fa fa-crosshairs icon" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+   
+            <div class="content">
+              <mwl-calendar-month-view [locale]="'es'" [viewDate]="calendar.date" [events]="calendar.events" (dayClicked)="dayClicked($event)" [cellTemplate]="cellDay"></mwl-calendar-month-view>
+   
+                <ng-template #cellDay let-day="day" let-locale="locale">
+                  <div class="cell-top">
+                    <div class="cell-day" [ngClass]="{'cell-today': day.isToday, 'cell-has-event': hasEvents(day.date), 'cell-selected': isDateSelected(day.date)}" >
+                      {{ day.date | calendarDate:'monthViewDayNumber':locale }}
+                    </div>
+                  </div>
+                </ng-template>
+            </div>
+          </div>
+   
+          <div class="col-sm-4 padding">
+            <!--Listado de actividades del día -->
+            <div class="row">
+              <div class="col-xs-6 col-sm-4 col-md-3" [style.margin-top.em]="0.25">
+                <button type="button" class="btn btn-accepted btn-xs" (click)="fadeIn('event-commission');">Crear</button>
+              </div>
+              <div class="col-xs-6 col-sm-8 col-md-9 search">
+                <div class="item-group">
+                  <span class="item-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                  <input type="text" [(ngModel)]="filter.title">
+                </div>
+              </div>
+            </div>
+   
+            <div class="row item-list">
+              <ul>
+                <li *ngFor="let event of calendar.events | filterBy: filter" (click)="update(event.id);">
+                  <span class="time">{{ event.hour }}</span>
+                  <span class="title">
+                    {{ event.fulldate }}
+                    <br>
+                    {{ event.title }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+   </div>
+
+ </div>
+
+ <event-commission [event]="event" (emmiteEvent)="store($event)"></event-commission>

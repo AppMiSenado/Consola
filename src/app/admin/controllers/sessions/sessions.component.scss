@@ -1,0 +1,70 @@
+@import "../../../app.component";
+@include scrollbar();
+
+
+.table2{
+	width: 80%;
+	margin: 2em auto 0;
+	
+	.body-table
+	{
+		max-height: 65vh;
+		overflow-y: scroll; 
+	}
+
+}
+.form-group2{
+	margin: 0 2.5%;
+}
+.form-group{
+
+	
+	ul{
+		list-style: none;
+		margin-top: 15px;
+
+		li{
+			display: inline-block;
+			float: left;
+
+			span{
+				width: 100%;
+			}
+		}
+		li.nombre{
+				width: auto;
+				margin-right: 15px;
+			}
+		li.switchli{
+			width: 40px;
+		}
+		li.switch-label{
+			color: $grey;
+			margin-left: 10px;
+		}
+	}
+}
+
+
+.heigth-table{
+    height: 60vh;
+    overflow: scroll;
+}
+
+.btn-accepted:focus{
+	background-color: $gold!important;
+	
+}
+
+
+.search2 .item-group .item-addon:first-child {
+    padding-right: 0em;
+}
+
+
+
+// .top-header-table{
+//     position: sticky;
+//     top: 0;
+//     z-index: 999;
+// }

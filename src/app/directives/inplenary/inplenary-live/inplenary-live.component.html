@@ -1,0 +1,349 @@
+<app-navbar></app-navbar>
+<div class="">
+  <in-plenary></in-plenary>
+  <div class="module">
+    <section class=" pr-5">
+      <div class="row">
+        <article class="col-sm-2">
+          <app-sidebar></app-sidebar>
+        </article>
+
+        <article class="col-sm-10">
+          <div class="row">
+            <article class="col-sm-6">
+              <h4>
+                <button (click)="fadeIn('newUrlStreaming')" [disabled]="!_generalService.activePlenary" class="btn-streaming">Actualizar enlace de streaming
+                  <i class="fa fa-television" aria-hidden="true"></i>
+                </button>
+              </h4>
+            </article>
+            <article class="col-sm-6 text-right">
+              <button class="btn btn-danger" (click)="destroyPlenary()">Cerrar sesión
+                <i class="fa fa-power-off" aria-hidden="true"></i>
+              </button>
+            </article>
+          </div>
+
+          <div class="row">
+            <article class="col-sm-6">
+              <div class="curules shadow-2" style="background-color:#fff;">
+                <div class="row">
+                  <article class="col-xs-6">
+                    <h3>Asistencia (
+                      <span>{{_curulesService.totalAsistencia.length}}</span>/ {{_curulesService.arrayCurulesAsistencia.length}})</h3>
+                    <!-- <h4>Última actualización: hace 2 minutos</h4> -->
+                  </article>
+                  <article class="col-xs-6 text-right">
+                    <ul class="list-inline">
+                      <li>
+                        <h3>Modo actual:
+                          <span>{{text}}</span>
+                        </h3>
+                      </li>
+                      <li>
+                        <label class="switch">
+                          <input type="checkbox" [(ngModel)]="mapa" (change)="changeText()">
+                          <span class="slider round"></span>
+                        </label>
+                      </li>
+                    </ul>
+                  </article>
+                </div>
+                <hr class="hr-separator">
+                <div class="mt-5 animated fadeIn" *ngIf="mapa">
+                  <app-curules-directive [presence]="true" [red]="true" [asistence]="true" (senatorsPresence)="asistencia($event)"></app-curules-directive>
+                  
+                </div>
+
+
+                <div class="mt-5 animated fadeIn list-senators" *ngIf="!mapa">
+                  <div class="search" style="width:50%; float:right;">
+                    <div class="item-group">
+                      <span class="item-addon">
+                        <i aria-hidden="true" class="fa fa-search"></i>
+                      </span>
+                      <input type="text" [(ngModel)]="inputSearch" (keyup)="searchSenator()">
+                    </div>
+                  </div>
+
+                  <div class="clearfix"></div>
+
+                  <br>
+
+                  <article class="box-list" style="height: 48vh;">
+                    <ul class="lista" *ngIf="_curulesService.arrayCurulesAsistencia.length !=0 && inputSearch.length === 0">
+                      <li *ngFor="let s of _curulesService.arrayCurulesAsistencia">
+                        <div class="row">
+                          <div>
+                            <article class="col-xs-2">
+                              <div class="img-senador" [style.backgroundImage]="'url('+ s.image +')'">
+                              </div>
+                            </article>
+                            <article class="col-xs-7">
+                              <h3>{{s.fullname}}</h3>
+                              <!-- <p>
+                                <a href="mailto:{{s.contacts.email}}" target="_blank">{{s.contacts.email}}</a>
+                              </p> -->
+                            </article>
+                            <article class="col-xs-3 text-right" style="position: relative; right: 30px;">
+                              <label class="switch-assist">
+                                <input type="checkbox" [(ngModel)]="s.attend" (change)="asistencia(_curulesService.arrayCurulesAsistencia)">
+                                <span class="slider-assist round-assist"></span>
+                              </label>
+                            </article>
+                          </div>
+
+                        </div>
+                      </li>
+                    </ul>
+
+                    <ul class="lista" *ngIf="resultsSearch.length != 0 && noResult== false">
+                      <li *ngFor="let s of resultsSearch">
+                        <div class="row">
+                          <div>
+                            <article class="col-xs-2">
+                              <div class="img-senador" [style.backgroundImage]="'url('+ s.image +')'">
+                              </div>
+                            </article>
+                            <article class="col-xs-7">
+                              <h3>{{s.fullname}}</h3>
+                              <!-- <p>
+                                <a href="mailto:{{s.contacts.email}}" target="_blank">{{s.contacts.email}}</a>
+                              </p> -->
+                            </article>
+                            <article class="col-xs-3">
+                              <label class="switch-assist" style="position: relative; right: 30px;">
+                                <input type="checkbox" [(ngModel)]="s.attend" (change)="asistencia(_curulesService.arrayCurulesAsistencia)">
+                                <span class="slider-assist round-assist"></span>
+                              </label>
+                            </article>
+                          </div>
+
+                        </div>
+                      </li>
+                    </ul>
+
+                    <div *ngIf="noResult== true && resultsSearch.length == 0">
+                      <h3 class="text-center">Sin resultado en la busqueda</h3>
+                    </div>
+                  </article>
+
+                  <article class="footer-list-senators">
+                      <button class="btn btn-accepted btn-xs" style="margin-top: 20px;position: absolute;right: 15%;" (click)="sendAssistances()">
+                        Enviar
+                      </button>
+                  </article>
+
+                </div>
+              </div>
+
+              <div class="curules shadow-2" style="background-color: #fff;margin-top: 10px;padding: 0px 0; height:300px;">
+
+                <div class="streaming" *ngIf="_generalService.activePlenary.livestreaming">
+                  <div class="embed-responsive embed-responsive-16by9" style="box-shadow: 3px 3px 2px grey;">
+                    <iframe class="embed-responsive-item" [src]="_generalService.activePlenary.livestreaming| domSeguro" frameborder="0" allow="encrypted-media" allowfullscreen width="100%"></iframe>
+                  </div>
+                </div>
+
+              </div>
+            </article>
+
+
+            <!-- Derecha -->
+            <article class="col-sm-6">
+              <div class="shadow-2 discussion animated fadeIn" style="background-color:#fff;" *ngIf="_curulesService.billPlay.length !=0">
+                <div class="row">
+                  <h3>Proyecto en discusión</h3>
+                  <article class="col-xs-1">
+                    <div class="circle" style="background-color: green"></div>
+                  </article>
+                  <article class="col-xs-10">
+                    <h4>{{_curulesService.billPlay.name}}</h4>
+                  </article>
+                  <article class="col-xs-1">
+                    <div class="btn-play" (click)="_curulesService.endDiscussion(); updateStatePlenary()">
+                      <i class="fa fa-2x fa-pause"></i>
+                    </div>
+                  </article>
+
+                </div>
+                <hr class="hr-separator">
+                <div class="text-center">
+                  <a role="button" data-toggle="collapse" aria-expanded="true" aria-controls="votacion" (click)="changeIcon()" style="color:black;">
+                    <i class="fa fa-angle-double-up fa-2x pulse" aria-hidden="true" *ngIf="iconChange"></i>
+                    <i class="fa fa-angle-double-down fa-2x pulse" aria-hidden="true" *ngIf="!iconChange"></i>
+                  </a>
+                </div>
+
+                <div class="collapse in" id="votacion">
+                  <article class="box-votacion">
+                    <ul class="list-inline text-right" style="margin-top: -40px;">
+                      <li>
+                        <h3>Votos por el
+                          <span>{{textoVoto}}</span>
+                        </h3>
+                      </li>
+                      <li>
+                        <label class="switch">
+                          <input type="checkbox" [(ngModel)]="votoSi" (change)="changeVoto()">
+                          <span class="slider round"></span>
+                        </label>
+                      </li>
+                    </ul>
+
+
+                    <app-curules-directive [enableVotation]="true" [optionVoto]="votoSi" (senatorsClickVotation)="votation($event)"></app-curules-directive>
+
+                    <hr class="hr-separator">
+
+                    <div class="footer-votation">
+                      <ul class="list-inline text-right">
+                        <li>
+                          <button class="btn-accepted" (click)="_curulesService.reset(_curulesService.billPlay.id)" *ngIf="_curulesService.idLocalStorage">
+                            Resetear
+                          </button>
+                        </li>
+                        <li>
+                          <button class="btn-accepted" (click)="_curulesService.cancelar(); setear(); updateStatePlenary()">
+                            Cancelar
+                          </button>
+                        </li>
+                        <li>
+                          <button class="btn-accepted" (click)="_curulesService.votar()" [disabled]="votations.length == 0">
+                            Votar
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </article>
+                </div>
+
+              </div>
+
+              <div class="shadow-2 bill-list" [ngClass]="{'disabledBillList': !billPlay}" style="background-color:#fff;">
+                <div class="top-list">
+                  <div class="row">
+                    <article class="col-xs-6">
+                      <h3>Proyectos de Ley</h3>
+                    </article>
+                    <article class="col-xs-6">
+                      <div class="search" style="margin-top: 15px;">
+                        <div class="item-group">
+                          <span class="item-addon">
+                            <i aria-hidden="true" class="fa fa-search"></i>
+                          </span>
+                          <input type="text" [(ngModel)]="inputSearchProject" (keyup)="searchBill()">
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                  <hr class="hr-separator">
+                </div>
+
+                <div class="body-list">
+
+                  <div class="spinner" *ngIf="loading">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                  </div>
+
+
+                  <ul class="lista" *ngIf="inputSearchProject.length === 0">
+                    <li *ngFor="let p of _curulesService.bills; let i = index;" style="padding: 15px 10px;">
+                      <div class="row">
+                        <article class="col-xs-2">
+                          <div class="circle" [ngClass]="{'yellow': p.voted_at == null, 'red': p.voted_at !== null}"></div>
+                        </article>
+                        <article class="col-xs-8">
+                          <h4>{{p.name}}</h4>
+                        </article>
+                        <article class="col-xs-2">
+                          <button *ngIf="p.voted_at == null" (click)="_curulesService.playBill(p, i); updateStatePlenary()" class="btn-play" [disabled]="billPlay">
+                            <i class="fa fa-2x fa-play"></i>
+                          </button>
+
+                          <span class="fa-stack fa-lg" *ngIf="p.voted_at !== null" style="color:black;" (click)="fadeIn('showVotation');sendData(p.id)">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </article>
+                      </div>
+                    </li>
+                  </ul>
+
+
+                  <ul class="lista" *ngIf="resultsSearchProject.length != 0 && noResultProject== false">
+                    <li *ngFor="let p of resultsSearchProject, let i = index;" style="padding: 15px 10px;">
+                      <div class="row">
+                        <article class="col-xs-2">
+                          <div class="circle" [ngClass]="{'yellow': p.voted_at == null, 'red': p.voted_at !== null}"></div>
+                        </article>
+                        <article class="col-xs-8">
+                          <h4>{{p.name}}</h4>
+                        </article>
+                        <article class="col-xs-2">
+                          <button *ngIf="p.voted_at == null" (click)="_curulesService.playBill(p, i); updateStatePlenary()" class="btn-play" [disabled]="billPlay">
+                            <i class="fa fa-2x fa-play"></i>
+                          </button>
+
+                          <span class="fa-stack fa-lg" *ngIf="p.voted_at !== null" style="color:black;" (click)="fadeIn('showVotation');sendData(p.id)">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </article>
+                      </div>
+                    </li>
+                  </ul>
+                  <!-- <div *ngIf="noResult== true && resultsSearch.length == 0"> -->
+                  <!-- <div *ngIf="noResultProject== true && resultsSearchProject.length ==0">
+                    <h3 class="text-center">Sin resultado en la busqueda</h3>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="footer-list">
+                <div class="row">
+                  <article class="col-xs-6">
+                    <h4>Agregar Proyecto de Ley</h4>
+                  </article>
+                  <article class="col-xs-6">
+                    <ul class="list-inline text-right">
+                      <li>
+                        <button class="btn-accepted" (click)="fadeIn('newBill')">
+                          <i class="fa fa-plus"></i> Crear
+                        </button>
+                      </li>
+                      <li>
+                        <button class="btn-accepted" (click)="fadeIn('searchBill')">
+                          <i class="icon-search"></i> Buscar
+                        </button>
+                      </li>
+                    </ul>
+                  </article>
+                </div>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<!-- Streaming -->
+<!-- <div class="streaming" *ngIf="_generalService.activePlenary.livestreaming">
+  <div class="embed-responsive embed-responsive-16by9" style="box-shadow: 3px 3px 2px grey;">
+    <iframe class="embed-responsive-item" [src]="_generalService.activePlenary.livestreaming| domSeguro" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+  </div>
+</div> -->
+
+<!-- <commission-new (emmiterUrl)="urlRecived($event)"></commission-new> -->
+
+<app-new-bill></app-new-bill>
+<app-search-bill></app-search-bill>
+<app-show-votation [data]="idProjectSelected"></app-show-votation>

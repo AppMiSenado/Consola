@@ -1,0 +1,203 @@
+@import "./../../app.component";
+
+$fg: lighten($black,10%);
+$borderWidth: 1px;
+
+
+.box-radios{
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 3px 0px grey;
+  height: 40px;
+  border-radius: 2px;
+  padding-top: 5px;
+}
+
+input[type=radio], input[type=checkbox] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  visibility: visible;
+  display: block;
+  opacity: 0;
+  width: 50px;
+  height: 30px;
+}
+
+
+
+label {
+  color: lighten($black,40%);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+  text-transform: capitalize;
+  transition: .3s;
+}
+
+input[type=radio]:checked + label, input[type=checkbox]:checked + label{
+  color: lighten($black,60%);
+  background: $fg;
+  box-shadow: 0px 0px 3px 0px grey;
+  // margin-right: -4px;
+}
+
+// label + input[type=radio] + label {
+//   // border-left: solid $borderWidth $fg;
+//   // margin-right: -4px;
+// }
+.radio-group {
+  // border: solid $borderWidth $fg;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+  margin: 0px;
+  overflow: hidden;
+}
+
+.mt-15{
+  margin-top: 15px;
+}
+
+
+
+// Base Colors
+$shade-1: #d7dcdf !default;
+$shade-0: #fff !default;
+
+// Reset
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-family: sans-serif;
+  padding: 60px 20px;
+  
+  @media (min-width: 600px) {
+    padding: 60px;
+  }
+}
+
+.range-slider {
+  margin: 60px 0 0 0%;
+}
+
+
+// Range Slider
+$range-width: 100% !default;
+
+$range-handle-color: $black !default;
+$range-handle-color-hover: $gold !default;
+$range-handle-size: 20px !default;
+
+$range-track-color: $shade-1 !default;
+$range-track-height: 10px !default;
+
+$range-label-color: $black !default;
+$range-label-width: 60px !default;
+
+.range-slider {
+  width: $range-width;
+  margin: auto;
+  text-align: center;
+}
+
+.range-slider__range {
+  -webkit-appearance: none;
+  width: calc(100% - (100px));
+  height: $range-track-height;
+  border-radius: 5px;
+  background: $range-track-color;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  float: left;
+
+  // Range Handle
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-webkit-slider-thumb {
+    background: $range-handle-color-hover;
+  }
+
+  &::-moz-range-thumb {
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border: 0;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-moz-range-thumb {
+    background: $range-handle-color-hover;
+  }
+}
+
+
+// Range Label
+.range-slider__value {
+  display: inline-block;
+  position: relative;
+  width: 72px!important;
+  color: $shade-0;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: $range-label-color;
+  padding: 5px 10px;
+  margin-left: 8px;
+  top: -10px;
+  font-size: 1em!important;
+
+  &:after {
+    position: absolute;
+    top: 8px;
+    left: -7px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-right: 7px solid $range-label-color;
+    border-bottom: 7px solid transparent;
+    content: '';
+  }
+}
+
+
+// Firefox Overrides
+::-moz-range-track {
+    background: $range-track-color;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer { 
+  border: 0; 
+}

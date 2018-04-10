@@ -1,0 +1,38 @@
+<div id="modal-newUrlStreaming" class="hide">
+  <div class="form">
+
+    <div class="form-header">Iniciar Live Streaming</div>
+
+    <div class="form-body">
+      <p>Comision Primera</p>
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <label>Enlace</label>
+            <div class="input-group-addon">https://www.youtube.com/embed/</div>
+            <input type="text" placeholder="Codigo del streaming" style="padding: 0;" [(ngModel)]="streamingCode" name="streamingCode"
+              (keyup)="setUrl()">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>
+            Previsualización
+          </label>
+          <div *ngIf="urlVideo" class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" [src]="urlVideo|domSeguro" frameborder="0" allow="encrypted-media"  allowfullscreen></iframe>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut('newUrlStreaming')">Cancelar</button>
+
+      <!-- <button *ngIf="!startPlenary && !streamingCode" type="button" class="btn btn-accepted" (click)="iniciar(); fadeOut('newUrlStreaming')" [disabled]="!urlVideo">Iniciar</button> -->
+      
+      <button *ngIf="startPlenary && streamingCode && !_generalService.activePlenary.livestreaming" type="button" class="btn btn-accepted" (click)="iniciar(); setPlenary(); fadeOut('newUrlStreaming')" [disabled]="!urlVideo">Iniciar</button>
+
+      <button *ngIf="streamingCode && _generalService.activePlenary.livestreaming" type="button" class="btn btn-accepted" (click)="editStreaming();  fadeOut('newUrlStreaming')" [disabled]="!urlVideo">Editar</button>
+    </div>
+  </div>
+</div>

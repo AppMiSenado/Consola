@@ -1,0 +1,64 @@
+<div id="modal-commission" class="hide">
+  <div class="form">
+    <div class="form-header">Nueva Comisión</div>
+    <div class="form-body">
+      <form>
+        <div class="form-group">
+          <div class="text-left">
+            <div class="imagen">
+              <span>
+                <div class="foto" [ngClass]="{'avatar': !form.logo}">
+                  <img [src]="form.logo" alt="" *ngIf="form.logo">
+                </div>
+              </span>
+              <input #avatar type='file' accept="image/*" class="hidden" (change)="loadImage($event)">
+              <button type="button" class="agregar-img" (click)="avatar.click()">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nombre *</label>
+          <input type="text" [(ngModel)]="form.name" name="name">
+        </div>
+        <div class="form-group">
+          <label>Descripción *</label>
+          <textarea [(ngModel)]="form.description" name="description" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Playlist ID *</label>
+          <input type="text" [(ngModel)]="form.playlist_id" name="playlist_id">
+        </div>
+        <div class="form-group">
+          <label>Senadores</label>
+          <div class="search">
+            <div class="item-group">
+              <span class="item-addon"><i class="icon-search" aria-hidden="true"></i></span>
+              <input type="text" [(ngModel)]="filterSenators" name="senators">
+            </div>
+          </div>
+          <br>
+
+          <article class="grey-bg">
+            <ul class="lista2">
+              <li class="container-fluid" *ngFor="let senator of senators | filterBy:{'fullname': filterSenators}">
+                <ul class="col-sm-12">
+                  <li class="col-sm-8"><p>{{ senator.fullname }}</p></li>
+                  <li class="col-sm-4 text-right">
+                      <input type="checkbox" id="{{ senator.firebase_id }}" (click)="add(senator.id)" [checked]="inArray(senator.id)">
+                      <label for="{{ senator.firebase_id }}" class="check-box"></label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </form>
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut('commission')">Cancelar</button>
+      <button type="button" class="btn btn-accepted" [disabled]="isDisabled()" (click)="save()">Guardar</button>
+    </div>
+  </div>
+</div>

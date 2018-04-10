@@ -1,0 +1,37 @@
+<div id="modal-newBill" class="hide">
+  <div class="form">
+
+    <div class="form-header">Crear Proyecto de Ley</div>
+
+    <form class="form-body" novalidate (ngSubmit)="onSubmit()" #billForm="ngForm">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-input" placeholder="" [(ngModel)]="bill.name" name="name" required  #name="ngModel">
+      </div>
+<!-- 
+      <div *ngIf="!name.touched" class="error">
+        Requerido
+      </div> -->
+      <div class="form-group">
+        <label>Enunciado</label>
+        <textarea rows="10" class="form-textarea" [(ngModel)]="bill.description" name="body" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Enlace</label>
+        <input type="url" class="form-input" placeholder="" [(ngModel)]="bill.link" name="link" required>
+      </div>
+
+
+      <div class="form-group">
+        <label>Categorías</label>
+        <app-chips [categories]="categories" [buttons]="true" (categoriesEmmit)="getCategoriesSelected($event)" [create]= "true"></app-chips>
+      </div>
+
+      <div class="form-footer">
+        <button type="reset" class="btn btn-cancelled" (click)="fadeOut('newBill'); resetForm()">Cancelar</button>
+        <button type="submit" class="btn btn-accepted" (click)="fadeOut('newBill')" [disabled]="!bill.categories || bill.categories.length == 0 || !billForm.form.valid" >Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

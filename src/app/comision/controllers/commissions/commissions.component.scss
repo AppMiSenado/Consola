@@ -1,0 +1,110 @@
+@import "./../../../app.component";
+
+.table{
+  list-style: none;
+  display   : table;
+  margin    : 0;
+  padding   : 0;
+
+  .table-head{
+    background-color: $gold;
+    color           : white;
+    font-weight     : bold;
+    height          : 2em;
+    padding         : 0.5em 0;
+  }
+
+  .table-row{
+    border-bottom: 1px solid $gold;
+    cursor       : default;
+    padding      : 0.5em;
+    @include transition-property(background-color);
+    @include transition-duration(0.4s);
+
+    &:hover{
+      background-color: $grey;
+    }
+
+    a.button{
+      color    : $gold;
+      cursor   : pointer;
+      font-size: 1.3em;
+
+      @include opacity(0.5);
+      @include transition-property(opacity);
+      @include transition-duration(0.4s);
+
+      &:hover{
+        @include opacity(1);
+      }
+    }
+  }
+}
+
+.imagen{
+  
+  height: 80px;
+  width: 80px;
+  position: relative;
+  margin: auto;
+
+  .foto{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-color: $grey;
+
+    img{
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+    }
+  }
+
+  .avatar{
+    background-image: url('/assets/img/user.png');
+    background-size: cover;
+  }
+  
+  .agregar-img{
+    color: $grey;
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: $gold;
+    font-size: 1em;
+
+    i{
+      padding-top: 5px;
+    }
+
+    &:hover{
+      background: $black;
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+}
+
+.lista2 
+{
+	max-height: 50vh;
+	overflow-y: scroll;
+	ul 
+	{
+	}
+	ul li 
+	{
+	display: inline-block;
+	float: left;
+	border-bottom: none;
+	padding: 0;
+	}
+	p{
+		padding: 8px 0 0 0;
+    margin: 0;
+	}
+}

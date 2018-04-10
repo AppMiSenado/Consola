@@ -1,0 +1,192 @@
+<app-navbar></app-navbar>
+<div class="container">
+	<div class="module">
+		<section class="container no-plenary" style="height: 90vh; overflow: overlay;">
+			<div class="row">
+				<article class="col-sm-2">
+					<app-sidebar></app-sidebar>
+				</article>
+				<article class="col-sm-10 row">
+					<div class="col-sm-8">
+						<div class="title">Dashboard</div>
+						<p>Comentarios en vivo</p>
+						<div class="top-bar-right text-right">
+							<select [(ngModel)]="filtered">
+								<option value="">Filtrar por</option>
+								<option value="{{ commission.firebase_id }}" *ngFor="let commission of commissions">{{ commission.name }}</option>
+							</select>
+						</div>
+						<!-- TABS -->
+						<div>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#nuevos" aria-controls="nuevos" role="tab" data-toggle="tab">Nuevos</a>
+								</li>
+								<li role="presentation">
+									<a href="#aprovados" aria-controls="aprovados" role="tab" data-toggle="tab">Aprobados</a>
+								</li>
+								<li role="presentation">
+									<a href="#archivados" aria-controls="archivados" role="tab" data-toggle="tab">Descartados</a>
+								</li>
+							</ul>
+						</div>
+						<!-- Tab panes -->
+						<div class="tab-content white-bg">
+							<div role="tabpanel" class="tab-pane active" id="nuevos">
+								<article class="box-list">
+									<ul class="lista2">
+										<li class="col-sm-12" *ngFor="let comment of comments.new | filterBy: { 'commission_id' : filtered }; let i = index">
+											<article class="col-sm-8">
+												<p>
+													<b>{{ comment.commission_name }}</b>
+												</p>
+											</article>
+											<article class="col-sm-4 text-right">
+												<p>{{ comment.human_date }}</p>
+											</article>
+											<article class="col-sm-12">
+												<b>
+													<i>{{ comment.email }}</i>
+												</b>, {{ comment.message }}
+											</article>
+											<article class="col-sm-12 text-right">
+												<a>
+													<span class="icon-check-circled checked" (click)="validate(true, i, 'new')"></span>
+												</a>
+												<a>
+													<span class="icon-cancel-circled cancel" (click)="validate(false, i, 'new')"></span>
+												</a>
+											</article>
+										</li>
+									</ul>
+								</article>
+							</div>
+
+							<div role="tabpanel" class="tab-pane" id="aprovados">
+								<article class="box-list">
+									<ul class="lista2">
+										<li class="col-sm-12" *ngFor="let comment of comments.allowed | filterBy: { 'commission_id' : filtered }; let i = index">
+											<article class="col-sm-8">
+												<p>
+													<b>{{ comment.commission_name }}</b>
+												</p>
+											</article>
+											<article class="col-sm-4 text-right">
+												<p>{{ comment.human_date }}</p>
+											</article>
+											<article class="col-sm-12">
+												<b>
+													<i>{{ comment.email }}</i>
+												</b>, {{ comment.message }}
+											</article>
+											<article class="col-sm-12 text-right">
+												<a>
+													<span class="icon-check-circled checked"></span>
+												</a>
+												<a>
+													<span class="icon-cancel-circled cancel disabled" (click)="validate(false, i, 'allowed')"></span>
+												</a>
+											</article>
+										</li>
+									</ul>
+								</article>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="archivados">
+								<article class="box-list">
+									<ul class="lista2">
+										<li class="col-sm-12" *ngFor="let comment of comments.discarded | filterBy: { 'commission_id' : filtered }; let i = index">
+											<article class="col-sm-8">
+												<p>
+													<b>{{ comment.commission_name }}</b>
+												</p>
+											</article>
+											<article class="col-sm-4 text-right">
+												<p>{{ comment.human_date }}</p>
+											</article>
+											<article class="col-sm-12">
+												<b>
+													<i>{{ comment.email }}</i>
+												</b>, {{ comment.message }}
+											</article>
+											<article class="col-sm-12 text-right">
+												<a>
+													<span class="icon-check-circled checked disabled" (click)="validate(true, i, 'discarded')"></span>
+												</a>
+												<a>
+													<span class="icon-cancel-circled cancel"></span>
+												</a>
+											</article>
+										</li>
+									</ul>
+								</article>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="title">Comisiones</div>
+						<article class="white-bg">
+							<ul class="lista2">
+								<li class="container-fluid" *ngFor="let commission of commissions; let i = index">
+									<ul class="col-sm-12">
+										<li class="col-sm-8">{{ commission.name }}</li>
+										<li class="col-sm-4 text-right">
+											<label class="switch">
+												<input type="checkbox" [checked]="( commission.session_id !== false ) ? true : false" (click)="status(i, $event)">
+												<span class="slider round"></span>
+											</label>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</article>
+					</div>
+
+
+					<!--div class="video col-sm-12">
+				<div class="horizontal-scroll-wrapper squares" *ngFor="let commission of commissions; let i = index">
+								<ng-template [ngIf]="( commission.session_id !== false ) ? true : false">
+								<div class="thumb">
+												<p>{{ commission.name }}</p>
+												<a class="text-right button" (click)="livestreaming(i)"><span class="icon-pencil"></span></a>
+												<iframe [src]="commission.livestreaming|domSeguro" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+								</div>
+								</ng-template>
+				</div>
+				<div class="">
+								<div class="inactive text-center">
+												<h1><span class="icon-comisiones"></span></h1>
+												No hay comisiones activas
+												actualmente.
+								</div>
+				</div>
+		</div-->
+					<div class="video">
+						<div class="horizontal-scroll-wrapper squares">
+							<div *ngFor="let commission of commissions; let i = index">
+								<div class="thumb" *ngIf="commission.session_id">
+									<p>{{ commission.name }}</p>
+									<a class="text-right button" (click)="livestreaming(i)">
+										<span class="icon-pencil"></span>
+									</a>
+									<iframe [src]="commission.livestreaming|domSeguro" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+								</div>
+								<div class="inactive text-center" *ngIf="!commission.session_id">
+									<p>{{ commission.name }}</p>
+									<br>
+									<h1>
+										<span class="fa fa-clock-o"></span>
+									</h1>
+									Inactiva actualmente.
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+
+			</div>
+		</section>
+	</div>
+</div>
+<commission-session [commission]="commission" (emmiterUrl)="session($event)"></commission-session>
+<modal-close [id]="session_id" (emmiterAccept)="close($event)"></modal-close>

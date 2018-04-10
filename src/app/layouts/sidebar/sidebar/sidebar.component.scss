@@ -1,0 +1,49 @@
+@import "../../../app.component";
+
+$gris: #bdc3c7;
+
+.shadow-sidebar{
+    box-shadow: 2px 2px 2px $gris;
+    min-height: 89vh;
+
+    ul li {
+        border-bottom: 2px solid #B59E54;
+        box-shadow: inset 1px -2px 3px 0px #e0e0e0;
+        padding: 7px 0;
+        transition: all 200ms ease;
+        position: relative;
+
+        a {
+            color: black;
+        }
+    }
+}
+
+.shadow-sidebar .nav > li > a:hover, .nav > li > a:focus{
+    background-color: transparent;
+}
+
+.shadow-sidebar .nav > li:hover, .nav > li:focus{
+    background-color: black;
+}
+
+.shadow-sidebar .nav > li:hover a, .nav > li:focus a {
+    color: white;
+}
+
+
+.active {
+    background-color: black;
+    color: white !important;
+    border-radius: 0;
+    margin: -7px 0;
+    padding: 17px 14px;
+    transition: all 200ms ease;
+}
+
+.active:hover{
+    background-color: #212121;
+}
+span {
+    font-size: 1.5em;
+}

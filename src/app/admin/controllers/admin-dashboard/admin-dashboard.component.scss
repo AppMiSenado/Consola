@@ -1,0 +1,78 @@
+@import "./../../../app.component";
+@include scrollbar();
+
+
+ul.lista{
+	margin-top: 1.5em;
+	height: calc(80vh - 5em);
+  overflow-y: auto;
+  @include scrollbar();
+
+  @media #{$media_1360} {
+  	height: calc(78vh - 5em);
+  }
+}
+.nav-tabs > li 
+{
+	width: auto;
+}
+.tab-content
+{
+	height: calc(80vh - 5em);
+	overflow-y: scroll;
+	@include scrollbar();
+
+	@media #{$media_1360} {
+  	height: calc(72vh - 5em);
+  }
+
+	article{
+		width: 100%;
+		margin-bottom: 2em;
+		padding-bottom: 1em;
+	}
+	article:last-child{
+		margin-bottom: 0;
+	}
+
+
+}
+.analytics{
+	height: calc(82vh - 5em);
+	overflow-y: scroll;
+	@include scrollbar();
+
+	@media #{$media_1360} {
+  	height: calc(78vh - 5em);
+  }
+
+	article{
+		width: 100%;
+		margin-bottom: 2em;
+		padding-bottom: 1em;
+	}
+	article:last-child{
+		margin-bottom: 0;
+	}
+}
+form > .form-group select
+{
+	width: 100%;
+	background-color: #dad6d6;
+}
+.body-table{
+	height     : 60vh;
+	@include scrollbar();
+
+}
+.total-votes{
+	background-color : $grey;
+	padding          : 1em;
+	margin           : 20% 5%;
+	border-radius    : 20px;
+	box-shadow       : -4px 3px 10px #ccc;    
+}
+
+
+
+

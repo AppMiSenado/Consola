@@ -1,0 +1,45 @@
+<div id="modal-event-commission" class="modal-custom hide">
+  <div class="form">
+
+    <div class="form-header">Crear evento</div>
+
+    <div class="form-body">
+
+      <form>
+        <div class="form-group">
+          <label for="">Comisión *</label>
+          <select [(ngModel)]="form.commission_id" name="commission_id">
+            <option value="" disabled>Seleccionar Comisión</option>
+            <option *ngFor="let commission of commissions" [value]="commission.id" >{{ commission.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="">Evento *</label>
+          <input type="text" [(ngModel)]="form.title" name="title">
+        </div>
+
+        <div class="form-group">
+          <label for="">Fecha *</label>
+          <div class="item-group">
+            <span class="item-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+            <dp-date-picker [(ngModel)]="form.published_at" name="published_at" [config]="config" mode="daytime" theme="dp-material"></dp-date-picker>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Enlace *</label>
+          <div class="item-group">
+            <span class="item-addon"><i class="fa fa-link" aria-hidden="true"></i></span>
+            <input type="text" [(ngModel)]="form.link" name="link" placeholder="http://">
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut('event-commission')">Cancelar</button>
+      <button type="button" class="btn btn-accepted" [disabled]="isDisabled()" (click)="save()">Crear</button>
+    </div>
+  </div>
+</div>

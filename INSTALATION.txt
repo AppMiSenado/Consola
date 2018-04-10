@@ -1,0 +1,10 @@
+Para instalar y correr la app
+
+
+1) Instalar nodejs
+
+2) Instalar Angular CLI
+
+3) Ejecutar en la terminal dentro de la carpeta del proyecto npm install 
+
+4) Una vez instaladas las dependencias para correr en mode dev la app ejecutar ng serve -o

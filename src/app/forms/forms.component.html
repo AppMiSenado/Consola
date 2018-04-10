@@ -1,0 +1,158 @@
+<button type="button" name="button" (click)="fadeIn()">Test</button>
+
+<div #modal id="modal-custom" class="hide">
+  <div class="form">
+    <div class="form-header">
+      Title
+    </div>
+    <div class="form-body">
+
+      <div>
+        <!-- Formularios -->
+        <form>
+          <!-- Avatar -->
+          <div class="form-group">
+            <div class="avatar">
+              <input type="file" #avatar accept="image/*">
+              <div class="image"></div>
+              <div class="indicator" (click)="avatar.click()">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Switch -->
+          <div class="form-group">
+            <div style="display:table">
+              <div style="display:table-cell">Label</div>
+              <div style="display:table-cell">
+                <div class="switch">
+                  <label>
+                     <input type="checkbox" checked>
+                     <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input text -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <input type="text">
+          </div>
+
+          <!-- Input text -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <input type="password">
+          </div>
+
+          <!-- Textarea -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <textarea rows="8" cols="80"></textarea>
+          </div>
+
+          <!-- Date picker -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <div class="item-group">
+              <dp-date-picker [config]="config" theme="dp-material"></dp-date-picker>
+              <span class="item-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+            </div>
+          </div>
+
+          <!-- Text with icon -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <div class="item-group">
+              <span class="item-addon"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+              <input type="text">
+            </div>
+          </div>
+
+          <!-- Combobox -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <select>
+              <option>Option 1</option>
+              <option selected>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+            </select>
+          </div>
+
+          <!-- Radio Buttons -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <ul class="radio">
+              <li>
+                <input id="radio_1" type="radio" name="radio" checked>
+                <label for="radio_1">
+                  Option 1
+                  <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                </label>
+              </li>
+              <li>
+                <input id="radio_2" type="radio" name="radio">
+                <label for="radio_2">
+                  Option 2
+                  <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                </label>
+              </li>
+              <li>
+                <input id="radio_3" type="radio" name="radio">
+                <label for="radio_3">
+                  Option 3
+                  <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Radio Buttons -->
+          <div class="form-group">
+            <label for="">Label</label>
+            <div class="search">
+              <div class="item-group">
+                <span class="item-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                <input type="text">
+              </div>
+            </div>
+            <div class="list-content">
+              <ul class="checkbox">
+                <li>
+                  <input id="checkbox_1" type="checkbox" name="checkbox" checked>
+                  <label for="checkbox_1">
+                    Option 1
+                    <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                  </label>
+                </li>
+                <li>
+                  <input id="checkbox_2" type="checkbox" name="checkbox">
+                  <label for="checkbox_2">
+                    Option 2
+                    <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                  </label>
+                </li>
+                <li>
+                  <input id="checkbox_3" type="checkbox" name="checkbox">
+                  <label for="checkbox_3">
+                    Option 3
+                    <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut()">Cancelar</button>
+      <button type="button" class="btn btn-accepted">Aceptar</button>
+    </div>
+  </div>
+</div>

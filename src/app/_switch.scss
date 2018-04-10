@@ -1,0 +1,57 @@
+$white : #F2F2F2 !default;
+
+
+.switch {
+
+  label{
+    display : inline-block;
+    height  : 20px;
+    position: absolute;
+    width   : 30px;
+
+    input {display:none;}
+
+    .slider {
+      position         : absolute;
+      cursor           : pointer;
+      top              : 0;
+      left             : 0;
+      right            : 0;
+      bottom           : 0;
+      background-color : $white;
+      @include transition-duration(0.4s);
+
+      &:before {
+        content         : "";
+        background-color: $gold;
+        height          : 14px;
+        left            : 3px;
+        position        : absolute;
+        top             : 3px;
+        width           : 14px;
+        @include transition-duration(0.4s);
+      }
+    }
+
+    input[type="checkbox"]:checked + .slider {
+      background-color: $gold;
+    }
+
+    input[type="checkbox"]:focus + .slider {
+      box-shadow: 0 0 1px $grey;
+    }
+
+    input[type="checkbox"]:checked + .slider:before {
+      background-color: $white;
+      @include transform( translateX(11px) );
+    }
+
+    .round {
+      border-radius: 34px;
+
+      &:before {
+        border-radius: 50%;
+      }
+    }
+  }
+}

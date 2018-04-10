@@ -1,0 +1,44 @@
+<div id="modal-project" class="modal-custom hide">
+  <div class="form">
+
+    <div class="form-header">Crear proyecto de ley</div>
+
+    <div class="form-body">
+
+      <form>
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input type="text" name="name" [(ngModel)]="project.name">
+        </div>
+
+        <div class="form-group">
+          <label for="">Enunciado</label>
+          <textarea rows="8" cols="80" name="description" [(ngModel)]="project.description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="">Enlace</label>
+          <div class="item-group">
+            <span class="item-addon"><i class="fa fa-link" aria-hidden="true"></i></span>
+            <input type="text" placeholder="http://" name="link" [(ngModel)]="project.link">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="list-content">
+            <label>Categorías</label>
+            <app-chips *ngIf="edit" [categories]="categories" [buttons]="false" (categoriesEmmit)="getCategoriesSelected($event)" [categoriasSeleccionadas]="project.categories"></app-chips>
+
+            <app-chips *ngIf="!edit" [categories]="categories" [buttons]="true" (categoriesEmmit)="getCategoriesSelected($event)" [create]= "true" [resetear]="borrarChips"></app-chips>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut('project'); cancelar()">Cancelar</button>
+      <button *ngIf="!edit" type="button" class="btn btn-accepted" (click)="fadeOut('project'); saveBill()">Guardar</button>
+      <button *ngIf="edit" type="button" class="btn btn-accepted" (click)="fadeOut('project'); editBill()">Editar</button>
+    </div>
+  </div>
+</div>

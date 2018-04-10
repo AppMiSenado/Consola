@@ -1,0 +1,29 @@
+@import "./../../app.component";
+
+
+.heigth-table{
+    height: 80vh;
+    overflow: scroll;
+    @include scrollbar();
+
+    @media #{$media_1360} {
+      height: 65vh;
+    }
+}
+
+.top-header-table{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.container-projects{
+    bottom: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0.3em 0px 0px;
+    position: absolute;
+    right: 0px;
+    top: 4.35em;
+    width: 100%;
+}

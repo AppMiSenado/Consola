@@ -1,0 +1,32 @@
+@import "./../../app.component";
+@include scrollbar();
+
+$success : green !default;
+$warning : #F1C40F !default;
+$danger  : red !default;
+
+.session{
+  font-family    : 'FuturaBold';
+  color          : white;
+  text-transform : uppercase;
+  padding        : 0.5em;
+
+  .button{
+    cursor        : pointer;
+    position      : absolute;
+    right         : 1em;
+    text-transform: none;
+  }
+}
+
+.session-success{
+  background-color: $success;
+}
+
+.session-warning{
+  background-color: $warning;
+}
+
+.session-danger{
+  background-color: $danger;
+}

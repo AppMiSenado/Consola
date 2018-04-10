@@ -1,0 +1,21 @@
+<div id="modal-searchBill" class="hide">
+  <div class="form">
+
+    <div class="form-header">Buscar Proyecto de Ley</div>
+
+    <article class="form-body">
+
+      <app-chips [categoriesSelectedInput]="_generalService.activePlenary.projects"  [categotegoriesAll]="_generalService.bills" [search]="search" (categoriesEmmit)="getProyectsSelected($event)"></app-chips>
+
+    </article>
+
+
+
+    <div class="form-footer">
+      <button type="reset" class="btn btn-cancelled" (click)="fadeOut('searchBill')">Cancelar</button>
+      <button type="submit" class="btn btn-accepted" (click)="fadeOut('searchBill'); updatePlenary()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+ <!-- [categoriesSelectedInput]="_generalService.activePlenary.projects"  -->

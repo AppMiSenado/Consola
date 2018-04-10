@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+
+  <div class="module">
+    <section class="container no-plenary">
+      <div class="row">
+        <article class="col-sm-2">
+          <app-sidebar></app-sidebar>
+        </article>
+        <article class="col-sm-10">
+          <div class="title">Comisiones</div>
+          <div class="col-sm-12">
+            <div class="col-sm-8">
+              <button type="button" class="btn btn-accepted btn-xs" (click)="commission = {}; fadeIn('commission');">Crear</button>
+            </div>  
+  
+            <div class="col-sm-4 search2">
+              <div class="item-group">
+                <span class="item-addon"><i class="icon-search" aria-hidden="true"></i></span>
+                <input type="text" [(ngModel)]="filtered" (keyup)="searchCommision()">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12" [style.margin-top.em]="1.2">
+            <ul class="table body">
+              <li>
+                <div class="table-head col-sm-12 text-center">
+                  <div class="col-sm-10">Nombre</div>
+                  <div class="col-sm-2">Opciones</div>
+                </div>
+              </li>
+              
+              <li *ngFor="let commission of commissions">
+                <div class="table-row col-sm-12">
+                  <div class="col-sm-10">{{ commission.name }}</div>
+                  <div class="col-sm-1 text-center">
+                    <a class="button" (click)="update(commission.id);">
+                      <i class="icon-pencil button" aria-hidden="true"></i>
+                    </a>
+                  </div>
+  
+                  <div class="col-sm-1 text-center">
+                    <a class="button" data-toggle="modal" data-target="#modal-delete" href="#modal-delete" (click)="commission_id = commission.id">
+                      <i class="icon-trash" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+<modal-delete [id]="commission_id" (emmiterAccept)="delete()"></modal-delete>
+<new-commissions [commission]="commission" (emmiteCommission)="store($event)"></new-commissions>

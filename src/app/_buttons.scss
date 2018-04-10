@@ -1,0 +1,122 @@
+$btn-accepted        : #AD923B !default;
+$btn-accepted-active : #B59E54 !default;
+$btn-color           : #FFFFFF !default;
+$btn-cancelled       : #000000 !default;
+$btn-cancelled-active: #262626 !default;
+
+.btn-accepted {
+  background-color: $btn-accepted;
+  border-color    : $btn-accepted;
+  border-radius   : 0px;
+  color           : $btn-color;
+  font-family     : 'FuturaBold';
+  font-size       : x-small;
+  font-weight     : bold;
+  padding         : 0.5em 2em;
+  outline         : none; 
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open .dropdown-toggle.btn-accepted {
+    color           : $btn-color;
+    background-color: $btn-cancelled;
+    border-color    : $btn-accepted;
+    outline         : none; 
+  }
+
+  &:active,
+  &.active,
+  .open .dropdown-toggle.btn-accepted {
+    background-image: none;
+    background-color: $btn-cancelled;
+  }
+  
+
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] &,
+  &.disabled:hover,
+  &[disabled]:hover,
+  fieldset[disabled] &:hover,
+  &.disabled:focus,
+  &[disabled]:focus,
+  fieldset[disabled] &:focus,
+  &.disabled:active,
+  &[disabled]:active,
+  fieldset[disabled] &:active,
+  &.disabled.active,
+  &[disabled].active,
+  fieldset[disabled] &.active {
+    background-color: $btn-accepted;
+    border-color: $btn-accepted;
+  }
+
+  .badge {
+    color: $btn-accepted;
+    background-color: $btn-color;
+  }
+}
+
+/*************************************************************/
+
+.btn-cancelled {
+  background-color: $btn-cancelled;
+  border-color    : $btn-cancelled;
+  border-radius   : 0px;
+  color           : $btn-color;
+  font-family     : 'FuturaBold';
+  font-size       : x-small;
+  font-weight     : bold;
+  padding         : 0.5em 2em;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open .dropdown-toggle.btn-cancelled {
+    color           : $btn-color;
+    background-color: $btn-cancelled-active;
+    border-color    : $btn-cancelled;
+  }
+
+  &:active,
+  &.active,
+  .open .dropdown-toggle.btn-cancelled {
+    background-image: none;
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] &,
+  &.disabled:hover,
+  &[disabled]:hover,
+  fieldset[disabled] &:hover,
+  &.disabled:focus,
+  &[disabled]:focus,
+  fieldset[disabled] &:focus,
+  &.disabled:active,
+  &[disabled]:active,
+  fieldset[disabled] &:active,
+  &.disabled.active,
+  &[disabled].active,
+  fieldset[disabled] &.active {
+    background-color: $btn-cancelled;
+    border-color: $btn-cancelled;
+  }
+
+  .badge {
+    color: $btn-cancelled;
+    background-color: $btn-color;
+  }
+}
+
+.btn-danger{
+  border-radius: 0;
+  font-family     : 'FuturaBold';
+  font-size       : x-small;
+  font-weight     : bold;
+  padding         : 0.5em 2em;
+}

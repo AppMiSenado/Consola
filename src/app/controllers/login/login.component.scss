@@ -1,0 +1,75 @@
+@import "./../../app.component";
+
+@mixin background {
+  background-image   : url('/assets/senado.jpg');
+  background-size    : cover;
+  background-position: center;
+
+  &::after{
+    content: "";
+    background-color: $gold;
+    bottom   : 0;
+    left     : 0;
+    position : absolute;
+    right    : 0;
+    top      : 0;
+    @include opacity(0.5);
+  }
+}
+
+.login{
+  bottom   : 0;
+  left     : 0;
+  position : absolute;
+  right    : 0;
+  top      : 0;
+
+  @include background();
+
+  .box{
+    background-color: white;
+    left            : 75%;
+    min-height      : 500px;
+    position        : absolute;
+    top             : 50%;
+    width           : 30%;
+    z-index: 1;
+
+    @media only screen and (max-width: 415px) {
+      left  : 50%;
+      width : 80%;
+    }
+
+    @media only screen and (max-width: 1000px) and (min-width: 416px) {
+      width : 40%;
+    }
+
+    @include transform(translateY(-50%) translateX(-50%));
+    @include box-shadow(0px 3px 2px 2px rgba(0, 0, 0, 0.5));
+
+    .form{
+
+      .label{
+        font-size: 0.8em;
+        color    : $darkgrey;
+      }
+
+      .form-container{
+        padding: 6em 1em;
+
+        .title{
+          color         : $gold;
+          padding-bottom: 3em;
+          text-align    : right;
+
+          .appname{
+            font-size  : 1.5em;
+            font-weight: bold;
+            display    : block;
+          }
+        }
+      }
+
+    }
+  }
+}

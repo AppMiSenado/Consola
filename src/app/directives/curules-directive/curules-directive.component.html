@@ -1,0 +1,243 @@
+<div class="spinner" *ngIf="loading && !asistenciaPlenaria && !votosPlenaria && !showCurules && !enableVotation">
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div>
+</div>
+
+<section class="svg-container plenary" *ngIf="_curulesService.arrayCurules.length != 0 && !enableVotation && !asistence && !asistenciaPlenaria && !votosPlenaria && !showCurules">
+
+  <svg viewBox="0 0 5631 3896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="data-map">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="seats" transform="translate(-31.000000, -25.000000)">
+        <g *ngFor="let s of _curulesService.arrayCurules" class="tooltipo tooltipo-effect-1">
+
+          <!-- General -->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" (click)="clickSenator(s)"
+            [attr.transform]="s.seat.svg.transform" [attr.fill]="s.seat.svg.fill" *ngIf="!red && s.seat != null && !s.result"></circle>
+
+          <!-- Resultado -->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" stroke="#2196f3" stroke-width="20" (mousemove)="coordinates($event)"
+            (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" (click)="clickSenator(s)" [attr.transform]="s.seat.svg.transform"
+            fill="#00e5ff" *ngIf="!red && s.seat != null && s.result"></circle>
+
+        </g>
+      </g>
+    </g>
+  </svg>
+
+  <div class="row" style="margin-top: 25px;">
+    <article class="col-xs-6" style="transform: rotate(180deg);">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i aria-hidden="true" class="fa fa-search"></i>
+        </span>
+        <input type="text" [(ngModel)]="searchSenator" (keyup)="findSenator()" class="form-control">
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Asistencia -->
+<section class="svg-container plenary" *ngIf="_curulesService.arrayCurulesAsistencia.length != 0 && !enableVotation && asistence">
+  <button class="btn btn-accepted btn-xs" style="transform: rotateZ(180deg);margin-top: -45px;" (click)="sendAssistances()">
+    Enviar
+  </button>
+  <svg viewBox="0 0 5631 3896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="data-map">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="seats" transform="translate(-31.000000, -25.000000)">
+        <g *ngFor="let s of _curulesService.arrayCurulesAsistencia" class="tooltipo tooltipo-effect-1">
+
+          <!-- Asistencia -->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" (click)="clickSenator(s)"
+            [attr.transform]="s.seat.svg.transform" fill="#16a085" *ngIf="s.attend==true && red && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" (click)="clickSenator(s)"
+            [attr.transform]="s.seat.svg.transform" fill="#c0392b" *ngIf="s.attend==false && red && s.seat != null"></circle>
+        </g>
+      </g>
+    </g>
+  </svg>
+
+  <!-- <pre>
+    {{_curulesService.arrayCurulesAsistencia | json}}
+  </pre> -->
+</section>
+
+<!-- Votaciones -->
+<section class="svg-container plenary" *ngIf="_curulesService.billPlay && enableVotation && !asistence && !curulesAdmin">
+  <svg viewBox="0 0 5631 3896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="data-map">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="seats" transform="translate(-31.000000, -25.000000)">
+        <g *ngFor="let s of _curulesService.billPlay.senators" class="tooltipo tooltipo-effect-1">
+
+          <!-- Votaciones Vacias-->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" (click)="clickSenator(s)"
+            [attr.transform]="s.seat.svg.transform" fill="#808080" *ngIf="s.attend==true && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" [attr.transform]="s.seat.svg.transform"
+            fill="#eee" *ngIf="s.attend==false && s.seat != null"></circle>
+
+          <!-- Votaciones SI-->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" (click)="clickSenator(s)"
+            [attr.transform]="s.seat.svg.transform" fill="#16a085" *ngIf="s.attend==true && s.vote== true && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" [attr.transform]="s.seat.svg.transform"
+            fill="#eee" *ngIf="s.attend==false && s.seat != null"></circle>
+
+          <!-- Votaciones NO-->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" (click)="clickSenator(s)"
+            [attr.transform]="s.seat.svg.transform" fill="#c0392b" *ngIf="s.attend==true && s.vote== false && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" [attr.transform]="s.seat.svg.transform"
+            fill="#eee" *ngIf="s.attend==false && s.seat != null"></circle>
+
+        </g>
+      </g>
+    </g>
+  </svg>
+</section>
+
+
+<!-- ESTADISTICAS -->
+
+<!-- Asistencia de una Plenaria-->
+<section class="svg-container plenary" *ngIf="asistenciaPlenaria && asistenciaPlenariaSenadores">
+  <!-- <pre>
+    {{asistenciaPlenariaSenadores|json}}
+  </pre> -->
+  <svg viewBox="0 0 5631 3896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="data-map">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="seats" transform="translate(-31.000000, -25.000000)">
+        <g *ngFor="let s of asistenciaPlenariaSenadores" class="tooltipo tooltipo-effect-1">
+
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            [attr.transform]="s.seat.svg.transform" fill="#16a085" *ngIf="s.attended==true && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            [attr.transform]="s.seat.svg.transform" fill="#c0392b" *ngIf="s.attended==false && s.seat != null"></circle>
+        </g>
+      </g>
+    </g>
+  </svg>
+</section>
+
+<!-- Votaciones de una Plenaria-->
+<section class="svg-container plenary" *ngIf="votosPlenaria && votosPlenariaSenadores">
+  <svg viewBox="0 0 5631 3896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="data-map">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="seats" transform="translate(-31.000000, -25.000000)">
+        <g *ngFor="let s of votosPlenariaSenadores" class="tooltipo tooltipo-effect-1">
+
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            [attr.transform]="s.seat.svg.transform" fill="#16a085" *ngIf="s.vote==true && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            [attr.transform]="s.seat.svg.transform" fill="#c0392b" *ngIf="s.vote==false && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            [attr.transform]="s.seat.svg.transform" fill="#eee" *ngIf="s.vote==null && s.seat != null"></circle>
+        </g>
+      </g>
+    </g>
+  </svg>
+</section>
+
+
+<!-- Listar Curules (Sillas sin importar si tiene o no senador asignado) -->
+
+<section class="svg-container plenary" *ngIf="showCurules && curulesList">
+  <svg viewBox="0 0 5631 3896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="data-map">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="seats" transform="translate(-31.000000, -25.000000)">
+        <g *ngFor="let s of curulesList" class="tooltipo tooltipo-effect-1">
+
+          <!-- Disponibles -->
+          <circle [attr.cx]="s.svg.cx" [attr.cy]="s.svg.cy" [attr.r]="s.svg.r" [attr.stroke]="s.svg.stroke" stroke-width="1" [attr.transform]="s.svg.transform"
+            (click)="selectCurul(s)" fill="#eee" *ngIf="!s.senator_id"></circle>
+
+          <!-- Ocupados -->
+          <circle [attr.cx]="s.svg.cx" [attr.cy]="s.svg.cy" [attr.r]="s.svg.r" [attr.stroke]="s.svg.stroke" stroke-width="1" [attr.transform]="s.svg.transform"
+            (click)="selectCurul(s)" fill="#808080" *ngIf="s.senator_id"></circle>
+
+          <!-- Clickado -->
+          <circle [attr.cx]="s.svg.cx" [attr.cy]="s.svg.cy" [attr.r]="s.svg.r" [attr.stroke]="s.svg.stroke" stroke-width="1" (click)="selectCurul(s)"
+            [attr.transform]="s.svg.transform" fill="#16a085" *ngIf="s.selected == true"></circle>
+
+        </g>
+      </g>
+    </g>
+  </svg>
+
+</section>
+
+
+
+<!-- Votaciones EN ADMIN -->
+<section class="svg-container plenary" *ngIf="curulesAdmin && enableVotation">
+  <svg viewBox="0 0 5631 3896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="data-map">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="seats" transform="translate(-31.000000, -25.000000)">
+        <g *ngFor="let s of curulesAdmin" class="tooltipo tooltipo-effect-1">
+
+          <!-- Votaciones null-->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (click)="voteAdmin(s)" [attr.transform]="s.seat.svg.transform" fill="#808080" *ngIf="s.seat != null"></circle>
+
+          <!-- <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+              (mousemove)="coordinates($event)" (mouseenter)="onEvent($event, s)" (mouseleave)="onEvent($event)" [attr.transform]="s.seat.svg.transform"
+              fill="#eee" *ngIf="s.attend==false && s.seat != null"></circle> -->
+
+          <!-- Votaciones SI-->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (click)="voteAdmin(s)" [attr.transform]="s.seat.svg.transform" fill="#16a085" *ngIf="s.attended==true && s.vote== true && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            [attr.transform]="s.seat.svg.transform" fill="#eee" *ngIf="s.attended==false && s.vote== false && s.seat != null"></circle>
+
+          <!-- Votaciones NO-->
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            (click)="voteAdmin(s)" [attr.transform]="s.seat.svg.transform" fill="#c0392b" *ngIf="s.attended==true && s.vote== false && s.seat != null"></circle>
+
+          <circle [attr.cx]="s.seat.svg.cx" [attr.cy]="s.seat.svg.cy" [attr.r]="s.seat.svg.r" [attr.stroke]="s.seat.svg.stroke" stroke-width="1"
+            [attr.transform]="s.seat.svg.transform" fill="#eee" *ngIf="s.attended==false && s.vote== true && s.seat != null"></circle>
+
+        </g>
+      </g>
+    </g>
+  </svg>
+
+</section>
+
+
+<!-- Box del Hover -->
+
+<div class="box">
+  <span class="tooltipo-content">
+    <span class="tooltipo-front">
+      <img src="" class="img-senator" />
+    </span>
+    <span class="tooltipo-back">
+      <span class="content-name"></span>
+    </span>
+  </span>
+</div>

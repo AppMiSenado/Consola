@@ -1,0 +1,69 @@
+<div id="modal-notifications" class="modal-custom hide">
+  <div class="form">
+
+    <div class="form-header">Crear notificación</div>
+
+    <div class="form-body">
+
+      <form novalidate>
+        <div class="form-group">
+          <label for="">Titulo</label>
+          <input type="text" name="title" [(ngModel)]="notification.title">
+        </div>
+
+        <div class="form-group">
+          <label for="">Mensaje</label>
+          <textarea name="" id="" cols="30" rows="10" name="message" [(ngModel)]="notification.message"></textarea>
+        </div>
+
+        <div class="form-group">
+          <div class="item-group">
+            <span class="item-addon">
+              <i class="fa fa-link" aria-hidden="true"></i>
+            </span>
+            <input type="text" placeholder="http://" name="link" [(ngModel)]="notification.link">
+          </div>
+        </div>
+
+        <div class="notification">
+          <label>Cúando enviar la notificación?</label>
+          <div class="middle">
+            <label>
+              <input type="radio" name="radio" [(ngModel)]="programar" value="now" (change)="checkSend()"/>
+              <div class="front-end box">
+                <span>Ahora</span>
+              </div>
+            </label>
+
+            <label>
+              <input type="radio" name="radio" [(ngModel)]="programar" value="schedule" (change)="checkSend()"/>
+              <div class="back-end box">
+                <span>Programar</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="programar == 'schedule'">
+          <directive-schedules [schedule]="schedule" (objectsShedule)="scheduleRecived($event)"></directive-schedules>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="form-footer" style="position:relative;">
+          <button type="button" class="btn btn-cancelled" (click)="fadeOut('notifications')">Cancelar</button>
+          <button type="button" class="btn btn-accepted" (click)="saveNotification(); fadeOut('notifications')" [disabled]="!notification.title || !notification.message">Guardar</button>
+        </div>
+
+      </form>
+
+
+
+      <!-- <pre>
+       {{notification | json}}
+     </pre> -->
+    </div>
+
+  </div>
+
+</div>

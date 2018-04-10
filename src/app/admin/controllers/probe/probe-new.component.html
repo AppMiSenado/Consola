@@ -1,0 +1,54 @@
+<div id="modal-probeNew" class="hide">
+	<div class="form">
+		<div class="form-header">
+			<p>Nuevo Sondeo</p>
+		</div>
+		<form #forma="ngForm" novalidate (ngSubmit)="onSumbit(); fadeOut('probeNew')">
+			<div class="form-body">
+
+				<div class="form-group">
+					<label>Pregunta</label>
+					<input type="text" name="title" [(ngModel)]="probe.title" #title required>
+				</div>
+				<div class="form-group">
+					<label>Descripción</label>
+					<textarea name="description" [(ngModel)]="probe.description" #description required></textarea>
+				</div>
+
+				<div class="row">
+					<article class="col-sm-6">
+						<label for="">Apertura</label>
+						<div class="item-group">
+							<span class="item-addon">
+								<i class="fa fa-calendar-plus-o move-icon" aria-hidden="true"></i>
+							</span>
+							<dp-date-picker name="start" [config]="start" mode="day" theme="dp-material" [(ngModel)]="probe.start_at" style="position: relative;float: right; width: 90%;" required></dp-date-picker>
+						</div>
+					</article>
+
+					<article class="col-sm-6">
+						<label for="">Cierre</label>
+						<div class="item-group">
+							<span class="item-addon">
+								<i class="fa fa-calendar move-icon" aria-hidden="true"></i>
+							</span>
+							<dp-date-picker name="end" [config]="end" mode="day" theme="dp-material" [(ngModel)]="probe.end_at" style="position: relative;float: right; width: 90%;" required></dp-date-picker>
+						</div>
+					</article>
+				</div>
+				
+				<br>
+
+				<div class="form-group">
+					<label>
+						<i class="icon-link button" aria-hidden="true"></i> Enlace </label>
+					<input type="text" name="link" [(ngModel)]="probe.link" #link>
+				</div>
+			</div>
+			<div class="form-footer">
+				<button type="button" class="btn btn-cancelled" (click)="fadeOut('probeNew')">Cancelar</button>
+				<button type="submit" class="btn btn-accepted" [disabled]="!forma.valid" >Crear</button>
+			</div>
+		</form>
+	</div>
+</div>

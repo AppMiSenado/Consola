@@ -1,0 +1,347 @@
+@mixin baseline() {
+  background-color : $grey;
+  border           : none;
+  padding          : 0px 0.5em;
+  width            : 100%;
+}
+
+@mixin item-group() {
+  .item-group{
+    display: table;
+    width  : 100%;
+
+    .item-addon{
+      display    : table-cell;
+      text-align : center;
+      &:first-child{
+        padding-right: 1em;
+      }
+      &:last-child{
+        padding-left: 1em;
+      }
+    }
+  }
+}
+
+.form-group2{
+  width: 45%;
+  float: left;
+  margin: 10% 2.5%;
+}
+.form-group, .form-group2{
+
+  .icon{ 
+    font-size: 1.5em;
+  }
+
+  @include item-group();
+
+  .list-content{
+    max-height: 70vh;
+    overflow-y: overlay;
+    overflow-x: hidden;
+    @include scrollbar();
+  }
+
+  label{
+    font-weight: bold;
+  }
+
+  input[type=text],
+  input[type=email],
+  input[type=date],
+  input[type=password]{
+    @include baseline();
+    height : 30px;
+
+    &:focus{
+      outline: none;
+    }
+  }
+  input[type=date]{
+    font-size: 1em;
+    color: #999;
+  }
+  textarea{
+    @include baseline();
+    padding: 0.5em;
+    min-height: 100px;
+    @include scrollbar();
+
+    &:focus{
+      outline: none;
+    }
+  }
+
+  select{
+    background-color: $grey;
+    border    : none;
+    overflow  : hidden !important;
+    width     : 100%;
+    height    : 30px;
+    color     : #999; 
+
+
+    & > option{
+      background: white;
+    }
+
+    &:focus{
+      outline: none;
+    }
+
+
+  }
+  
+  ul.checkradio{
+      list-style: none;
+
+      li{
+
+        display: inline-block;
+        float: left;
+      }
+      
+    }
+
+  /**
+   * Radio Button
+   */
+  .radio{
+    display         : table;
+    list-style-type : none;
+    margin          : 0px;
+    padding         : 0px;
+    width           : 100%;
+
+    li {
+      display : table-cell;
+
+      label {
+        color       : $darkgrey;
+        cursor      : pointer;
+        display     : block;
+        padding-left: 1.75em;
+        position    : relative;
+
+        @include transition-property(color);
+        @include transition-duration(250ms);
+
+        &:hover{
+          color: black;
+        }
+      }
+
+      input[type="radio"]{
+        position: absolute;
+        @include opacity(0);
+      }
+
+      .indicator{
+        color    : $gold;
+        display  : none;
+        left     : 0em;
+        position : absolute;
+      }
+
+      input[type="radio"]:checked ~ label .indicator{
+        display: inline;
+      }
+
+      input[type="radio"]:checked ~ label{
+        color: black;
+      }
+    }
+  }
+
+  /**
+   * Checkbox
+   */
+  .checkbox{
+    list-style-type : none;
+    margin          : 0px;
+    padding         : 0px;
+    width           : 100%;
+
+    li {
+
+      border-bottom: 1px solid $gold;
+      min-height        : 35px;
+      padding-top   : 0.5em;
+
+      label {
+        cursor  : pointer;
+        color   : $darkgrey;
+        display : block;
+        position: relative;
+        padding-right: 35px;
+        @include transition-property(color);
+        @include transition-duration(250ms);
+
+        &:hover{
+          color: black;
+        }
+      }
+
+      input[type="checkbox"]{
+        position: absolute;
+        @include opacity(0);
+      }
+
+      .indicator{
+        color    : $gold;
+        display  : none;
+        right: -10px;
+        position: absolute;
+        top: 0; 
+      }
+
+      input[type="checkbox"]:checked ~ label .indicator{
+        display: inline;
+      }
+
+      input[type="checkbox"]:checked ~ label{
+        color: black;
+      }
+    }
+  }
+
+  .avatar{
+    height   : 100px;
+    position : relative;
+    width    : 100%;
+
+    input[type="file"]{
+      display: none;
+    }
+
+    .image{
+      background-color: $grey;
+      border-radius   : 50%;
+      height          : 100px;
+      position        : absolute;
+      right           : 0px;
+      width           : 100px;
+    }
+
+    .indicator{
+      background-color: $gold;
+      border-radius   : 50%;
+      bottom          : 0px;
+      color           : white;
+      cursor          : pointer;
+      height          : 2.5em;
+      position        : absolute;
+      right           : 0px;
+      width           : 2.5em;
+      padding         : 0.5em 0.5em 0 0.7em;
+    }
+  }
+
+  iframe{
+    width: 100%;
+    height: 35vh;
+  }
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  
+  /* Hide default HTML checkbox */
+  .switch input {display:none;}
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: $gold;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px $gold;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+}
+
+.form-group, .form-group2{
+
+  span{
+    width: 10%;
+    font-size: 1.3em;
+  }
+
+  input.icon{
+    width: 80% !important;
+  }
+
+  
+  select.icon{
+    width: 80%;
+    font-size: 1em;
+    margin-top: 10px;
+  }
+
+  .logo-prev{
+
+  width: 20%;
+  float: right;
+
+    .imagen{
+      width: 3em;
+      height: 3em;
+      margin-right: 0;
+      border-radius: 100%;
+      background-image: url('/assets/img/user.png');
+      background-color: $grey;
+      background-size: cover;
+    }
+  }
+
+  a{
+    color: $gold;
+    
+    &:hover{
+      color: $black;
+    }
+    &:active{
+      color: $black;
+    }
+  }
+}

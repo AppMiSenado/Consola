@@ -1,0 +1,283 @@
+@import "../../../app.component";
+@import "../inplenary.component";
+.yellow{
+  background-color: $warning;
+}
+
+
+$red: #c0392b;
+$green: #16a085;
+
+
+.red{
+  background-color: #d9534f;
+}
+
+.curules{
+    width: 100%;
+    height: 75vh;
+    overflow-y: overlay;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 0px 20px 0px 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    top: 9px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {display:none;}
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: $gold;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px $gold;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  // switch-assist 
+
+  .switch-assist {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    top: 9px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch-assist input {display:none;}
+  
+  /* The slider */
+  .slider-assist {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $red;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider-assist:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+  }
+  
+  input:checked + .slider-assist {
+    background-color: $green;
+  }
+  
+  input:focus + .slider-assist {
+    box-shadow: 0 0 1px $green;
+  }
+  
+  input:checked + .slider-assist:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+  }
+  
+  /* Rounded sliders */
+  .slider-assist.round-assist {
+    border-radius: 34px;
+  }
+  
+  .slider-assist.round-assist:before {
+    border-radius: 50%;
+  }
+
+  //
+
+
+  .img-senador{
+      width: 70px;
+      height: 70px;
+      margin: 5px auto;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center center;
+      background-image: url(/assets/img/user.png);
+  }
+
+  .discussion{
+    min-height: 130px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 15px;
+    h3{
+      margin-left: 15px;
+    }
+  }
+
+  .circle{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  .fa-angle-double-down{
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+
+  }
+
+  .bill-list{
+    margin-top: 15px;
+    height: 74vh;
+    padding: 0 15px;
+    position: relative;
+    overflow: overlay;
+    transition: 350ms;
+    padding-bottom: 80px;
+  }
+
+  .top-list{
+    width: 100%;
+    position: sticky;
+    top: 0%;
+    background-color: #fff;
+    z-index: 999;
+  }
+
+  .footer-list{
+    width: 95%;
+    position: absolute;
+    bottom: 0%;
+    height: 72px;
+    border-top: 1px solid #212121;
+    background-color: #fff;
+    margin-left: 14px;
+    padding-top: 20px;
+  }
+
+  .btn-accepted i{
+    font-size: 12px!important;
+  }
+
+  .btn-play {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .btn-play:disabled {
+    color:#bdc3c7;
+  }
+
+  .disabledBillList{
+    margin-top: 0;
+    height: 86vh;
+  }
+
+
+  .box-votacion{
+    padding:20px 15px;
+  }
+
+  .streaming{
+    width: 80%;
+    height: 275px;
+    position: relative;
+    margin: 0 auto;
+    top: 50px;
+  }
+
+
+  .btn-streaming{
+    border:none;
+    background-color: transparent;
+  }
+
+  .btn-streaming:hover, .btn-streaming:focus{
+    border: none!important;
+    outline: none!important;
+  }
+
+  .list-senators{
+    position: relative;
+  }
+
+  .footer-list-senators{
+    position: absolute;
+    width: 110%;
+    height: 40px;
+    background-color: #fff;
+    bottom: -15px;
+    left: 0;
+  }
+
+  @media (max-width: 1366px){
+    .curules{
+        // width: 100%;
+        height: 60vh;
+        // overflow: overlay;
+        // box-sizing: border-box;
+        // padding: 0px 20px 0px 20px;
+    }
+
+    .img-senador{
+      width: 35px;
+      height: 35px;
+      margin: 7px auto;
+    }
+
+    .lista{
+      h3{
+        font-size: 18px;
+      }
+    }
+  }

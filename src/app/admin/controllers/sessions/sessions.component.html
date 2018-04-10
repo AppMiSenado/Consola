@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+<section class="container">
+<div class="row">
+	<article class="col-sm-2">
+	<app-sidebar></app-sidebar>
+</article>
+<article class="col-sm-10">
+	<div class="col-sm-12 row">
+		<div class="title col-sm-12">Sesiones</div>
+	</div>
+	<div class="">
+			<div class="col-sm-12">
+				<div class="col-sm-8">
+					<!-- <button type="button" class="btn btn-accepted btn-xs" (click)="fadeIn('sessionsNew');" >Nuevo</button> -->
+				</div>
+				<div class="col-sm-4 text-right">
+					<div class="search2">
+						<div class="item-group">
+							<span class="item-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+							<!-- <input type="text" [(ngModel)]="search" (keyup)="searchSesions()" placeholder="AAAA-MM-DD"> -->
+							<dp-date-picker [config]="config" mode="daytime" name='date' theme="dp-material" [(ngModel)]="search" (click)="searchSesions()"></dp-date-picker>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="col-sm-12">
+
+			<div class="spinner" *ngIf="loading" style="z-index:9999; position:absolute; left: 44%;">
+				<div class="rect1"></div>
+				<div class="rect2"></div>
+				<div class="rect3"></div>
+				<div class="rect4"></div>
+				<div class="rect5"></div>
+			  </div>
+			  
+			<ul class="table2">
+				<li>
+					<div class="table-head col-sm-12 text-left">
+						<div class="col-sm-8">Fecha</div>
+						<div class="col-sm-2 text-center">Editar</div>
+					</div>
+				</li>
+				<div class="body-table white-bg"
+				style="position:relative" infiniteScroll [infiniteScrollDistance]="2"
+				[infiniteScrollThrottle]="1000" [scrollWindow]="false" [infiniteScrollUpDistance]="1.5" (scrolled)="onScrollDown()">
+					<li *ngFor="let p of plenaries">
+						<div class="table-row col-sm-12">
+							<div class="col-sm-8">{{p.start_at | date:'medium'}}</div>
+							<div class="col-sm-2 text-center">
+								<a class="button" (click)="fadeIn('sessionsNew');selectSeccion(p)">
+									<i class="icon-pencil button" aria-hidden="true"></i>
+								</a>
+							</div>
+						</div>
+					</li>
+				</div>
+			</ul>
+		</div>
+	</div>
+</article>
+</div>
+</section>
+<modal-delete></modal-delete>
+<sessions-new [session]="sessionSelected" (sendUpdate)="recivedData($event)"></sessions-new>

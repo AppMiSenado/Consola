@@ -1,0 +1,17 @@
+@import "../../../app.component";
+
+.heigth-table{
+    height: 80vh;
+    overflow: scroll;
+}
+
+.heigth-left{
+    height: 80vh;
+    overflow: overlay;
+}
+
+@include scrollbar();
+
+@media #{$media_1360} {
+    height: 65vh;
+}

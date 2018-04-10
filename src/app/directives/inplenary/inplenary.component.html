@@ -1,0 +1,30 @@
+<div class="session session-success hide" [ngClass]="{'show': _generalService.plenaria == 'en vivo'}">
+  Plenaria en vivo
+  <span class="button" [routerLink]="['//inplenary-live']">
+    Ingresar
+    <i class="fa fa-sign-in" aria-hidden="true"></i>
+  </span>
+</div>
+<div class="session session-warning hide" [ngClass]="{'show': _generalService.plenaria == 'programada'}">
+  Plenaria programada
+
+  <span class="button" (click)="fadeIn('plenary')" style="position: relative; left: 10px;">
+    <i class="icon-pencil" aria-hidden="true"></i>
+  </span>
+
+  <span class="button" (click)="fadeIn('newUrlStreaming')">
+    Iniciar sesión
+    <i class="fa fa-power-off" aria-hidden="true"></i>
+  </span>
+</div>
+<div class="session session-danger hide" [ngClass]="{'show': _generalService.plenaria == 'no hay'}">
+  No hay plenaria
+  <span class="button" (click)="fadeIn('plenary')">
+    Programar
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+  </span>
+</div>
+
+<in-plenary-new></in-plenary-new>
+
+<app-new-url-streaming [startPlenary]="true" (emmiterUrl)="urlRecived($event)"></app-new-url-streaming>

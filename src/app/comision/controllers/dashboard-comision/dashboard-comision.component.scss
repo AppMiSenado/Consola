@@ -1,0 +1,179 @@
+@import "./../../../app.component";
+
+.nav-tabs > li 
+{
+	width: auto;
+}
+.lista2  article  a
+{
+	font-size: 2em;
+}
+.lista2 
+{
+	ul 
+	{
+	}
+	ul li 
+	{
+	display: inline-block;
+	float: left;
+	border-bottom: none;
+	padding: 0;
+	}
+}
+.tab-content
+{
+	overflow-y: auto;
+	height: 40vh;
+}
+.body 
+{
+	padding: 0 !important;
+}
+.video 
+{
+	margin-top: 2em;
+  width: 100%;
+  position: absolute;
+  bottom: -95px;
+}
+
+.thumb {
+  height: 100%;
+  display: inline-block;
+  color: #fff;
+  white-space: nowrap;
+
+  p 
+  {
+    width: 80%;
+    float: left;
+  }
+  a 
+  {
+    width: 20%;
+    float: left;
+    color: inherit;
+
+    span{
+      font-size: 1.3em;
+    }
+  }
+  iframe
+  {
+  width: 100%;
+  float: left;
+  }
+}
+
+
+
+.input-group-addon {
+  padding: 6px 0px 6px 12px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+}
+
+
+
+$finalHeight: 25vh;
+$finalWidth: 163vh;
+$value: 32vh;
+$scrollBarHeight: 1px;
+
+::-webkit-scrollbar {
+  width: $scrollBarHeight;
+  height: $scrollBarHeight;
+}
+
+::-webkit-scrollbar-button {
+  width: $scrollBarHeight;
+  height: $scrollBarHeight;
+}
+
+body {
+  background: #111;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.horizontal-scroll-wrapper {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: calc(#{$value} + #{$scrollBarHeight});
+  height: $finalWidth;
+  margin: 0;
+  padding-top: $scrollBarHeight;
+  background: #333;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: rotate(-90deg) translateY(-$value);
+  transform-origin: right top;
+  color: $grey;
+  
+  & > div {
+    display: block;
+    padding: 5px;
+    transform: rotate(90deg);
+    transform-origin: right top;
+  }
+
+  p 
+  {
+    width: 80%;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  a 
+  {
+    width: 20%;
+    float: left;
+    color: inherit;
+
+    span{
+      font-size: 1.3em;
+    }
+  }
+  iframe
+  {
+  width: 100%;
+  float: left;
+  }
+
+  .inactive{
+
+  padding-top: 3%;
+  color      : $grey;
+  height     : 95%;
+
+  p{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  }
+}
+
+.squares {
+  padding: $finalHeight 5vh;
+  & > div {
+    width: $finalHeight;
+    height: 1.5 * $finalHeight;
+    margin: 10px 0;
+  }
+}
+
+

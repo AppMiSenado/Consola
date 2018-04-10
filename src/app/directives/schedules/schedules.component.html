@@ -1,0 +1,60 @@
+<!-- Periocidad -->
+<label for="">Frecuencia</label>
+<div class="text-center box-radios">
+    <div class="radio-group" *ngFor="let s of schedule; let i = index;">
+        <input type="radio" id="{{s.en}}" name="selector" [value]="s.en" (change)="formatFrecuency($event)">
+        <label for="{{s.en}}">{{s.es}}</label>
+    </div>
+</div>
+
+<!-- Rango -->
+<div class="range mt-15">
+    <div class="row">
+        <article class="col-xs-6">
+            <div class="form-group">
+                <label for="">Inicio</label>
+                <div class="item-group">
+                    <span class="item-addon">
+                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                    </span>
+                    <dp-date-picker [config]="datePickerConfig" mode="day" theme="dp-material" [(ngModel)]="scheduleFormat.start_at"></dp-date-picker>
+                </div>
+            </div>
+        </article>
+        <article class="col-xs-6">
+            <div class="form-group">
+                <label for="">Fin</label>
+                <div class="item-group">
+                    <span class="item-addon">
+                        <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+                    </span>
+                    <dp-date-picker [config]="datePickerConfig" mode="day" theme="dp-material" [(ngModel)]="scheduleFormat.end_at"></dp-date-picker>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+<!-- Dias -->
+<div class="form-group" *ngIf="frecuency == 'weekly'">
+    <label for="">Los días</label>
+    <div class="text-center box-radios">
+        <div class="radio-group" *ngFor="let s of daysOfWeek; let i = index;">
+            <input type="checkbox" id="{{i}}" [name]="i" [value]="i" (change)="getDays($event)">
+            <label for="{{s}}">{{s}}</label>
+        </div>
+    </div>
+</div>
+
+<!-- Horario -->
+<div class="form-group">
+    <label for="">A las:</label>
+    <div class="range-slider">
+        <input class="range-slider__range" type="range" value="0" min="0" max="86400" step="1800" [(ngModel)]="horario" (change)="formatTime()">
+        <span class="range-slider__value">{{horarioPrint}}</span>
+    </div>
+</div>
+
+<!-- <pre>
+    {{scheduleFormat|json}}
+</pre> -->

@@ -1,0 +1,101 @@
+<div id="modal-sessionsNew" class="hide">
+	<div class="form">
+
+		<div class="form-header">
+			<p>Editar Sesión</p>
+		</div>
+
+		<div class="spinner" *ngIf="loading" style="z-index:9999;">
+			<div class="rect1"></div>
+			<div class="rect2"></div>
+			<div class="rect3"></div>
+			<div class="rect4"></div>
+			<div class="rect5"></div>
+		</div>
+
+		<div class="form-body" *ngIf="sessionData && !loading">
+
+
+			<div class="row">
+				<div class="form-group2" style="width:100%;">
+					<label for="">Fecha</label>
+					<br>
+					<input type="text" class="icon" [value]="sessionData.start_at.date|date:'medium'" disabled style="font-size: 12px;">
+					<span class="icon-calendar"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="">Sesión</label>
+				<select name="" id="" (change)="selectProyect($event)">
+					<option value="" disabled="" selected="">Seleccione un proyecto</option>
+					<option *ngFor="let p of sessionData.data; let i = index;" [value]="i">
+						{{p.project.name}}
+					</option>
+				</select>
+			</div>
+
+
+			<div class="form-group">
+				<div class="row">
+					<article class="col-sm-6">
+						<ul class="list-inline" style="margin-top:0;" *ngIf="curulesVotation">
+							<li>
+								<h5>Estado:
+									<span style="font-size: 1em;">{{text}}</span>
+								</h5>
+							</li>
+							<li>
+								<label class="switch" style="position: relative; top: 7px;">
+									<input type="checkbox" [(ngModel)]="mapa" (change)="changeText()">
+									<span class="slider round"></span>
+								</label>
+							</li>
+						</ul>
+					</article>
+					<article class="col-sm-6 text-right">
+						<button type="button" class="btn btn-accepted btn-xs" (click)="fadeIn('searchBillAdmin')">Agregar Proyecto</button>
+					</article>
+				</div>
+
+			</div>
+			<div class="form-group separator-top container-fluid">
+
+			</div>
+			<div class="form-group2" style="width: 30%;">
+				<label for="">Votación</label>
+			</div>
+			<div class="row">
+				<div class="form-group2 text-right" style="width: 58%;">
+					<button class="btn btn-xs" (click)="opcion = 'si'" [ngClass]="{'btn-accepted ': opcion == 'si', 'btn-cancelled': opcion == 'no' || opcion == null}">Si</button> -
+					<button class="btn btn-xs" (click)="opcion = 'no'" [ngClass]="{'btn-accepted ': opcion == 'no', 'btn-cancelled': opcion == 'si' || opcion == null}">No</button> -
+					<button class="btn btn-xs" (click)="opcion = null" [ngClass]="{'btn-accepted ': opcion == null, 'btn-cancelled': opcion == 'si' || opcion == 'no'}">Sin Votar</button>
+				</div>
+			</div>
+			<br>
+
+			<div class="form-group grey-bg" *ngIf="curulesVotation" style="padding: 10px;box-sizing: border-box;">
+				<app-curules-directive [enableVotation]="true" [voteOptionAdmin]="opcion" [curulesAdmin]="curulesVotation.senators" (senatorsClickVotation)="votation($event)"></app-curules-directive>
+			</div>
+
+			<div class="form-group" *ngIf="curulesVotation">
+				<div class="row">
+					<article class="col-sm-6">
+						<div id="si" [style.width.%]="100" [style.height.px]="200"></div>
+					</article>
+					<article class="col-sm-6">
+						<div id="no" [style.width.%]="100" [style.height.px]="200"></div>
+					</article>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="form-footer">
+			<button type="button" class="btn btn-cancelled" (click)="fadeOut('sessionsNew');cancel()">Cancelar</button>
+			<button type="button" class="btn btn-accepted" (click)="updatePlenarySesion()">Editar</button>
+		</div>
+	</div>
+</div>
+
+<app-new-bill-admin [bills]="projects" [idSessionPelanary]="session.id" (updateProjects)="updateView($event)" *ngIf="session"></app-new-bill-admin>
+<!-- <app-search-bill ></app-search-bill> -->

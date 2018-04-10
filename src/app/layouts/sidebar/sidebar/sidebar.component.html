@@ -1,0 +1,110 @@
+<div class="shadow-sidebar">
+  <!-- Rol Plenaria -->
+  <ul class="nav nav-pills nav-stacked" *ngIf="_authService.isPlenary()">
+    <li role="presentation">
+      <a [routerLink]="['/events']" routerLinkActive="active" title="Agenda">
+        <span class="icon-calendar" aria-hidden="true"></span>
+        <b>Agenda</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/projects']" routerLinkActive="active" title="Proyectos de Ley">
+        <span class="icon-chart" aria-hidden="true"></span>
+        <b>Proyectos de Ley</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/notifications']" routerLinkActive="active" title="Notificaciones">
+        <span class="icon-bell" aria-hidden="true"></span>
+        <b>Notificaciones</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/curules']" routerLinkActive="active" title="Curules">
+        <span class="icon-vcard" aria-hidden="true"></span>
+        <b>Curules</b>
+      </a>
+    </li>
+
+  </ul>
+
+  <!-- Role Comision -->
+  <ul class="nav nav-pills nav-stacked" *ngIf="_authService.isCommision()">
+    <!--link solo de rol comisiones-->
+    <li role="presentation">
+      <a [routerLink]="['/dashboard-comision']" routerLinkActive="active" title="Dashboard">
+        <span class="icon-home" aria-hidden="true"></span>
+        <b>Dashboard</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/commissions']" routerLinkActive="active" title="Comisiones">
+        <span class="icon-comisiones" aria-hidden="true"></span>
+        <b>Comisiones</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/events-commission']" routerLinkActive="active" title="Agenda">
+        <span class="icon-calendar" aria-hidden="true"></span>
+        <b>Agenda</b>
+      </a>
+    </li>
+
+  </ul>
+
+  <!-- Role Admin -->
+  <ul class="nav nav-pills nav-stacked" *ngIf="_authService.isAdmin()">
+    <li role="presentation">
+      <a [routerLink]="['/admin-dashboard']" routerLinkActive="active" title="Dashboard Administrador">
+        <span class="icon-home" aria-hidden="true"></span>
+        <b>Dashboard</b>
+      </a>
+    </li>
+    <li role="presentation">
+      <a [routerLink]="['/parties']" routerLinkActive="active" title="Partidos">
+        <span class="icon-flag" aria-hidden="true"></span>
+        <b>Partidos</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/senators']" routerLinkActive="active" title="Senadores">
+        <span class="icon-users" aria-hidden="true"></span>
+        <b>Senadores</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/categories']" routerLinkActive="active" title="Categorias">
+        <span class="icon-tags" aria-hidden="true"></span>
+        <b>Categorías</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/whippers']" routerLinkActive="active" title="Whippers">
+        <span class="icon-whipper" aria-hidden="true"></span>
+        <b>Whippers</b>
+      </a>
+    </li>
+ 
+    <li role="presentation">
+      <a [routerLink]="['/sessions']" routerLinkActive="active" title="Sesiones">
+        <span class="icon-session" aria-hidden="true"></span>
+        <b>Sesiones</b>
+      </a>
+    </li>
+
+    <li role="presentation">
+      <a [routerLink]="['/probe']" routerLinkActive="active" title="Sondeos">
+        <span class="icon-vote" aria-hidden="true"></span>
+        <b>Sondeos</b>
+      </a>
+    </li>
+  </ul>
+</div>

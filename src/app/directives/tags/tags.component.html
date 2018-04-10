@@ -1,0 +1,7 @@
+<div class="ng2-uberflug-tags">
+  <span *ngFor="let item of items; let i = index">
+    <i class="fa fa-times" aria-hidden="true" (click)="remove(i)"></i>
+    {{ item }}
+  </span>
+  <input type="text" #inputtags (keyup.enter)="add(inputtags.value); inputtags.value = ''">
+</div>

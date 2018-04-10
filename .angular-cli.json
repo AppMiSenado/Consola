@@ -1,0 +1,79 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "console"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/compass-mixins/lib/_compass.scss",
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/angular-calendar/css/angular-calendar.css",
+        "assets/font-awesome/css/font-awesome.css",
+        "assets/fontello/css/iconos-senado.css",
+        "assets/amcharts/amcharts/plugins/export/export.css",
+        "assets/animations/animate.css",
+        "styles.scss"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/moment/min/moment.min.js",
+        "assets/amcharts/amcharts/amcharts.js",
+        "assets/amcharts/amcharts/serial.js",
+        "assets/amcharts/amcharts/pie.js",
+        "assets/amcharts/amcharts/themes/light.js",
+        "assets/amcharts/amcharts/plugins/export/export.min.js",
+        "assets/amcharts/amcharts/plugins/export/libs/pdfmake/pdfmake.min.js",
+        "assets/amcharts/amcharts/plugins/export/libs/pdfmake/vfs_fonts.js",
+        "assets/amcharts/amcharts/plugins/export/libs/jszip/jszip.min.js",
+        "assets/amcharts/amcharts/plugins/export/libs/FileSaver.js/FileSaver.min.js",
+        "assets/amcharts/amcharts/plugins/export/libs/fabric.js/fabric.min.js",
+        "assets/notify/notify.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "component": {}
+  }
+}

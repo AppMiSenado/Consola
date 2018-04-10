@@ -1,0 +1,26 @@
+<div id="modal-searchBillAdmin" class="hide">
+
+  MODAL
+  <div class="form">
+
+    <div>
+      <div class="form-header">Buscar Proyecto de Ley</div>
+
+      <article class="form-body" *ngIf="bills && projects">
+
+        <app-chips [categoriesSelectedInput]="bills" [categotegoriesAll]="projects" [search]="true" (categoriesEmmit)="getProyectsSelected($event)"></app-chips>
+
+      </article>
+
+
+
+      <div class="form-footer">
+        <button type="reset" class="btn btn-cancelled" (click)="fadeOut('searchBillAdmin');cancelar()">Cancelar</button>
+        <button type="submit" class="btn btn-accepted" (click)="fadeOut('searchBillAdmin'); updatePlenary()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- [categoriesSelectedInput]="_generalService.activePlenary.projects"  -->

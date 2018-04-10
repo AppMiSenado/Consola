@@ -1,0 +1,118 @@
+<div id="modal-senator" class="hide">
+	<div class="form">
+		
+		<div class="form-header">
+			<p><ng-container *ngIf="this.senator == undefined || !this.senator.id">	Crear</ng-container>
+				<ng-container *ngIf="this.senator !== undefined && this.senator.id">	Editar</ng-container> 
+				Senador</p>
+			</div>
+			
+			<div class="form-body">
+				<form action="">
+					<div class="col-sm-6 separator-right">
+						<div class="form-group">
+							<div class="text-left">
+								<div class="imagen">
+									<span>
+										<div class="foto" [ngClass]="{'avatar': !form.photo}">
+                  		<img [src]="form.photo" alt="" *ngIf="form.photo">
+                		</div>
+									</span>
+									<input #avatar type='file' accept="image/*" class="hidden" (change)="loadImage($event)">
+									<button type="button" class="agregar-img" (click)="avatar.click()">
+									<i class="fa fa-camera" aria-hidden="true"></i></button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Nombre *</label>
+							<input type="text" [(ngModel)]="form.fullname" name="fullname">
+						</div>
+						<div class="form-group">
+							<label>Género *</label>
+							<select [(ngModel)]="form.gender_id" name="gender_id">
+								<option value="" selected disabled>Seleccionar Genero</option>
+								<option value="1">Masculino</option>
+								<option value="2">Femenino</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Correo Electrónico *</label>
+							<input type="email" [(ngModel)]="form.email" name="email">
+						</div>
+						<div class="form-group">
+							<label>Perfil *</label>
+							<input type="text" [(ngModel)]="form.profile" name="profile">
+						</div>
+						<div class="form-group">
+							<span class="icon-telephone"></span><label>Teléfono</label>
+							<ng2-uberflug-tags [items]="form.telephones" (emmiteItems)="telephones($event)"></ng2-uberflug-tags>
+						</div>
+						<div class="form-group">
+							<span class="icon-home"></span><label>Página web</label>
+							<input type="text" [(ngModel)]="form.webpage" name="webpage">
+						</div>
+						<div class="form-group">
+							<span class="fa fa-facebook"></span><label>Facebook</label>
+							<input type="text" [(ngModel)]="form.facebook" name="facebook">
+						</div>
+						<div class="form-group">
+							<span class="fa fa-twitter"></span><label>Twitter</label>
+							<input type="text" [(ngModel)]="form.twitter" name="twitter">
+						</div>
+						
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Departamento *</label>
+							<select [(ngModel)]="form.department_id" name="department_id">
+								<option value="" disabled>Seleccionar Departamento</option>
+								<option *ngFor="let department of departments" [value]="department.id" >{{ department.label }}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="">Fecha de Nacimiento *</label>
+							<dp-date-picker [(ngModel)]="form.birthdate" name="birthdate" [config]="config" theme="dp-material"></dp-date-picker>
+							<span class="icon-calendar"></span>
+						</div>
+						<div class="form-group">
+							<label for="">Partido Político *</label>
+							<select [(ngModel)]="form.party_id" name="party_id">
+								<option value="" disabled>Seleccionar Partido Político</option>
+								<option *ngFor="let party of parties" [value]="party.id" >{{ party.name }}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="">Comisión</label>
+							<select [(ngModel)]="form.commission_id" name="commission_id">
+								<option value="" disabled>Seleccionar Comisión</option>
+								<option *ngFor="let commission of commissions" [value]="commission.id" >{{ commission.name }}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="">Curul *</label>
+
+							<!-- Crear -->
+							<div *ngIf="!senator || !senator.id">
+								<app-curules-directive [showCurules]="true" [curulesList]="curules" [red]="true" (curulSelected)="curulSelected($event)"></app-curules-directive>
+							</div>
+							<!-- Editar -->
+
+							<div *ngIf="senator && senator.id">
+								<app-curules-directive [showCurules]="true" [curulesList]="curules" [red]="true" (curulSelected)="curulSelected($event)" [curulAsignado]="senator.seat" ></app-curules-directive>	
+							</div>
+							
+							<!-- {{ form.seat_id }} -->
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="form-footer">
+				<button type="button" class="btn btn-cancelled" (click)="fadeOut('senator')">Cancelar</button>
+				<button type="button" class="btn btn-accepted" [disabled]="isDisabled()" (click)="save()">
+					<ng-container *ngIf="this.senator == undefined || !this.senator.id">	Crear</ng-container>
+					<ng-container *ngIf="this.senator !== undefined && this.senator.id">	Editar</ng-container>
+				</button>
+			</div>
+		</div>
+	</div>

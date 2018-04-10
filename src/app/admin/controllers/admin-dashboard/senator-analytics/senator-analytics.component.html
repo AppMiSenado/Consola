@@ -1,0 +1,68 @@
+<div class="col-sm-9 text-right title">
+	{{ senator.fullname || '' }}
+</div>
+<div class="col-sm-9 analytics">
+	<article class="white-bg row">
+		<div class="title-analytics">
+			Votaciones
+		</div>
+		<div class="col-sm-4">
+			<div id="chartdiv-approved" [style.width.%]="100" [style.height.px]="250"></div>
+		</div>
+		<div class="col-sm-4">
+			<div id="chartdiv-rejected" [style.width.%]="100" [style.height.px]="250"></div>
+		</div>
+		<div class="col-sm-4">
+			<div align="center" class="total-votes">
+				<h1>{{ votes.length }}</h1>
+				<p>Total de votos</p>
+			</div>
+		</div>
+	</article>
+	<article class="white-bg row">
+		<div class="title-analytics">
+			Asistencias
+		</div>
+		<div class="col-sm-12">
+			<div id="chartdiv-assistances" [style.width.%]="100" [style.height.px]="250"></div>
+		</div>
+	</article>
+	<article class="white-bg row">
+		<div class="title-analytics">
+			Proyectos de Ley
+		</div>
+		<div class="col-sm-6">
+			<div class="search">
+				<div class="item-group">
+					<span class="item-addon"><i class="icon-search" aria-hidden="true"></i></span>
+					<input type="text" [(ngModel)]="project">
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 text-right">
+			<button type="button" class="btn btn-accepted btn-xs" (click)="generateCSV()">
+				<span class="fa fa-download" aria-hidden="true"></span> Descargar
+			</button>
+		</div>
+		<div class="col-sm-12">
+			<ul class="table2">
+				<li>
+					<div class="table-head col-sm-12 text-left">
+						<div class="col-sm-7">Nombre</div>
+						<div class="col-sm-3">Fecha</div>
+						<div class="col-sm-2">Votos</div>
+					</div>
+				</li>
+				<div class="body-table">
+					<li>
+						<div class="table-row col-sm-12" *ngFor="let vote of votes | filterBy:{project: projectname}">
+							<div class="col-sm-7">{{ vote.project }}</div>
+							<div class="col-sm-3">{{ vote.voted_at }}</div>
+							<div class="col-sm-2">{{ vote.approved }}</div>
+						</div>
+					</li>
+				</div>
+			</ul>
+		</div>
+	</article>
+</div>

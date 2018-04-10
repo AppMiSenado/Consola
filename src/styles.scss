@@ -1,0 +1,115 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "~/font-awesome/scss/font-awesome";
+
+$gold: #AD923B;
+
+@font-face {
+  font-family: 'FuturaBook';
+  src: url("/assets/fonts/FuturaBook/FuturaTOT-Book.eot");
+  src: url("/assets/fonts/FuturaBook/FuturaTOT-Book.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/FuturaBook/FuturaTOT-Book.woff") format("woff"), url("/assets/fonts/FuturaBook/FuturaTOT-Book.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'FuturaBold';
+  src: url("/assets/fonts/Century/CenturyGothic-Bold.eot");
+  src: url("/assets/fonts/Century/CenturyGothic-Bold.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/Century/CenturyGothic-Bold.woff") format("woff"), url("/assets/fonts/Century/CenturyGothic-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal; }
+
+body{
+  background-color: #F2F2F2;
+  font-family     : 'FuturaBook';
+}
+
+.futura-bold{
+	font-family: 'FuturaBold' !important;
+}
+
+.futura-bold-obli{
+	font-family: 'FuturaBoldObli' !important;
+}
+
+dp-date-picker {
+  display : block !important;
+  input{
+    background-color : #EFEFEF;
+    border           : none;
+    padding          : 0px 0.5em;
+    width            : 100% !important;
+  }
+}
+
+
+mwl-calendar-month-view{
+  .cal-has-events {
+    cursor: default !important;
+  }
+
+  .cal-today{
+    background-color: transparent !important;
+  }
+}
+
+
+.module {
+  padding: 1em;
+}
+
+
+//SPINNER
+.spinner {
+  margin: 30vh auto;
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+  background-color: rgba(0, 0, 0,.8);
+  border-radius: 10px;
+  box-shadow: 0 0 4px 2px grey;
+}
+
+.spinner > div {
+  background-color: $gold;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}

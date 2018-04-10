@@ -1,0 +1,92 @@
+<div id="modal-plenary" class="hide">
+  <!-- CREAR -->
+  <div class="form" *ngIf="_generalService.plenaria == 'no hay'">
+
+    <div class="form-header">Programar sesión de plenaria</div>
+
+    <div class="form-body">
+
+      <form #plenaryForm="ngForm">
+        <div class="form-group">
+          <label for="">Fecha</label>
+          <div class="item-group">
+            <span class="item-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+            <dp-date-picker [config]="config" mode="daytime" name='date' theme="dp-material" [(ngModel)]="plenary.start_at"></dp-date-picker>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Proyectos de ley</label>
+          <div class="search">
+            <div class="item-group">
+              <span class="item-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+              <input type="text" [(ngModel)]="filter.name" name="name">
+            </div>
+          </div>
+          <div class="list-content">
+            <ul class="checkbox" *ngFor="let law of laws | filterBy: filter">
+              <li>
+                <input id="checkbox_{{ law.id }}" type="checkbox" name="checkbox" [checked]="law.checked" (click)="addBillLow(law)">
+                <label for="checkbox_{{ law.id }}">
+                  {{ law.name }}
+                  <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut('plenary')">Cancelar</button>
+      <button type="submit" class="btn btn-accepted" [disabled]="!plenary.start_at || bills.length == 0" (click)="fadeOut('plenary'); schedulePlenary()">Aceptar</button>
+    </div>
+  </div>
+
+
+  <!-- EDITAR -->
+  <div class="form" *ngIf="_generalService.activePlenary && _generalService.plenaria == 'programada'">
+
+    <div class="form-header">Editar sesión de plenaria</div>
+
+    <div class="form-body">
+
+      <form #plenaryForm="ngForm">
+        <div class="form-group" *ngIf="_generalService.activePlenary">
+          <label for="">Fecha1</label>
+          <div class="item-group">
+            <span class="item-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+            <dp-date-picker [config]="config" mode="daytime" name='date' theme="dp-material" [(ngModel)]="_generalService.activePlenary.start_at"></dp-date-picker>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Proyectos de ley1</label>
+          <div class="search">
+            <div class="item-group">
+              <span class="item-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+              <input type="text" [(ngModel)]="filter.name" name="name">
+            </div>
+          </div>
+          <div class="list-content">
+            <ul class="checkbox" *ngFor="let law of lawsEdit | filterBy: filter">
+              <li>
+                <input id="checkbox_{{ law.id }}" type="checkbox" name="checkbox" [checked]="law.checked" (click)="addBillLow(law)">
+                <label for="checkbox_{{ law.id }}">
+                  {{ law.name }}
+                  <span class="indicator"><i class="fa fa-check-circle icon" aria-hidden="true"></i></span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut('plenary')">Cancelar</button>
+      <button type="submit" class="btn btn-accepted" [disabled]="!_generalService.activePlenary.start_at || bills.length == 0" (click)="fadeOut('plenary'); editPlenary()">Aceptar</button>
+    </div>
+  </div>
+</div>

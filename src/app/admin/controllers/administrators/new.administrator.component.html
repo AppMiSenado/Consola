@@ -1,0 +1,35 @@
+<div id="modal-administrator" class="hide">
+  <div class="form">
+    
+    <div class="form-header">
+      <p><ng-container *ngIf="this.administrator == undefined || !this.administrator.id"> Crear</ng-container>
+         <ng-container *ngIf="this.administrator !== undefined && this.administrator.id"> Editar</ng-container> Administrador</p>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label for="">Nombre * </label>
+        <input type="text" [(ngModel)] = "form.fullname" name="fullname">
+      </div>
+      <div class="form-group">
+        <label for="">Correo * </label>
+        <input type="text" [(ngModel)] = "form.email" name="email" [disabled]="this.administrator.id">
+      </div>
+      <div class="form-group">
+        <label>Rol *</label>
+        <select [(ngModel)]="form.role_id" name="role_id">
+          <option value="" disabled>Seleccionar Rol</option>
+          <option *ngFor="let role of roles" [value]="role.id" >{{ role.label }}</option>
+        </select>
+      </div>
+
+      
+    </div>
+    <div class="form-footer">
+      <button type="button" class="btn btn-cancelled" (click)="fadeOut('administrator')">Cancelar</button>
+        <button type="button" class="btn btn-accepted" [disabled]="isDisabled()" (click)="save()"> 
+          <ng-container *ngIf="this.administrator == undefined || !this.administrator.id">  Crear</ng-container>
+          <ng-container *ngIf="this.administrator !== undefined && this.administrator.id">  Editar</ng-container>
+        </button>
+    </div>
+  </div>
+</div>

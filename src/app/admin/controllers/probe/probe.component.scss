@@ -1,0 +1,47 @@
+@import "./../../../app.component";
+@include scrollbar();
+
+.text-center{
+
+	h1{
+		margin:0;
+	}
+}
+// .btn-accepted{
+// 	margin-bottom: 1em;
+// }
+// .btn-accepted{
+// 	margin-bottom: 1em;
+// }
+.contenedorScroll{
+	height         : 95vh;
+	overflow-y     : scroll;
+	padding-bottom : 4em;
+}
+.analitycsProbe{
+	width: 100%;
+	/*height: 360px;
+	overflow-y:scroll;*/
+	overflow-x:hidden; 
+	padding: 1em 0;
+
+	.col-sm-12{
+		margin-top: 1em;
+	}
+}
+
+.move-icon{
+	position: relative;
+    top: 5px;
+}
+
+.heigth-table{
+	position:relative;
+	height: 60vh; 
+	overflow: overlay;
+	
+}
+
+.scroll{
+	overflow: overlay
+}

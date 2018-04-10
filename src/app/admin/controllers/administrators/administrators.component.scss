@@ -1,0 +1,11 @@
+@import "./../../../app.component";
+
+.table2{
+  margin: 2em auto 0;
+  
+  .body-table
+  {
+    max-height: 65vh;
+    overflow-y: scroll; 
+  }
+}

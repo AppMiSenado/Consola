@@ -1,0 +1,32 @@
+<div id="modal-showVotation" class="hide">
+  <div class="form">
+
+    <div class="form-header">Votación del Proyecto</div>
+
+    <article class="form-body">
+
+      <div class="spinner" *ngIf="loading" style="z-index:9999;">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div *ngIf="!loading" id="chartdiv" [style.width.%]="100" [style.height.px]="300"></div>
+
+    </article>
+
+
+
+    <div class="form-footer">
+      <button type="reset" class="btn btn-cancelled" (click)="fadeOut('showVotation')">Cancelar</button>
+    </div>
+  </div>
+</div>

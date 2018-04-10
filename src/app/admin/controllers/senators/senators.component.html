@@ -1,0 +1,87 @@
+<app-navbar></app-navbar>
+<section class="container">
+	<div class="row">
+		<article class="col-sm-2">
+			<app-sidebar></app-sidebar>
+		</article>
+		<article class="col-sm-10">
+			<div class="col-sm-12 row">
+				<div class="title col-sm-12">Senadores</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="col-sm-8">
+					<button type="button" class="btn btn-accepted btn-xs" (click)="senator = {}; fadeIn('senator');">Nuevo</button>
+				</div>
+
+				<div class="spinner" *ngIf="loading" style="z-index:9999; position:absolute;left:47%;">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+
+				<div class="col-sm-4 text-right" *ngIf="!loading">
+					<div class="search2">
+						<div class="item-group">
+							<span class="item-addon">
+								<i class="icon-search" aria-hidden="true"></i>
+							</span>
+							<input type="text" [(ngModel)]="filtered" (keyup)="search()">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<ul class="table2">
+					<li>
+						<div class="table-head col-sm-12 text-left">
+							<div class="col-sm-1 text-center">Foto</div>
+							<div class="col-sm-4">Nombre</div>
+							<div class="col-sm-4">Comisión</div>
+							<div class="col-sm-1">Editar</div>
+							<div class="col-sm-1">Eliminar</div>
+						</div>
+					</li>
+					<div class="body-table white-bg"
+							infiniteScroll
+							[infiniteScrollDistance]="2"
+							[infiniteScrollThrottle]="1000"
+							[scrollWindow]="false"
+							[infiniteScrollUpDistance]="1.5"
+							(scrolled)="onScrollDown()">
+						<li *ngFor="let senator of senators ">
+							<div class="table-row col-sm-12">
+								<div class="col-sm-1" align="center">
+									<span>
+										<div class="logo">
+											<img [src]="senator.image">
+										</div>
+										<div class="logo-party">
+											<img [src]="senator.party.image">
+										</div>
+									</span>
+								</div>
+								<div class="col-sm-4">{{ senator.fullname }}</div>
+								<div class="col-sm-4" *ngIf="senator.commission !== null">{{ senator.commission.name }}</div>
+								<div class="col-sm-4" *ngIf="senator.commission === null">---</div>
+								<div class="col-sm-1" align="center">
+									<a class="button" (click)="update(senator.id);">
+										<i class="icon-pencil button" aria-hidden="true"></i>
+									</a>
+								</div>
+								<div class="col-sm-1 text-center">
+									<a class="button" data-toggle="modal" data-target="#modal-delete" href="#modal-delete" (click)="senator_id = senator.id">
+										<i class="icon-trash" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
+						</li>
+					</div>
+				</ul>
+			</div>
+		</article>
+	</div>
+</section>
+<modal-delete [id]="senator_id" (emmiterAccept)="delete()"></modal-delete>
+<new-senators [senator]="senator" (emmiteSenator)="store($event)"></new-senators>

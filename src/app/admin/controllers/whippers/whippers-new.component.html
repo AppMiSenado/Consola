@@ -1,0 +1,109 @@
+<div id="modal-whippersNew" class="hide">
+	<div class="form">
+		
+		<div class="form-header">
+			<p><ng-container *ngIf="this.whipper == undefined || !this.whipper.id">	Crear</ng-container>
+				<ng-container *ngIf="this.whipper !== undefined && this.whipper.id">	Editar</ng-container> 
+				Whippers
+			</p>
+		</div>
+		<div class="form-body">
+			<div class="form-group" *ngIf="whipper === undefined || !whipper.id">
+				<label for="">Vicular</label> <br>
+				<input class="radio" type="radio" name="vincular" value="senator" [checked]="type == 'senator'" [(ngModel)]="type">Senador
+				<input class="radio" type="radio" name="vincular" value="other" [checked]="type == 'other'" [(ngModel)]="type">Otro
+			</div>
+
+			<div class="row" *ngIf="type == 'other'">
+				<div class="text-left">
+					<div class="imagen">
+							<span>
+								<div class="foto" [ngClass]="{'avatar': !form.photo}">
+              		<img [src]="form.photo" alt="" *ngIf="form.photo">
+            		</div>
+							</span>
+							<input #avatar type='file' accept="image/*" class="hidden" (change)="loadImage($event)">
+							<button type="button" class="agregar-img" (click)="avatar.click()">
+							<i class="fa fa-camera" aria-hidden="true"></i></button>
+						</div>
+				</div>
+			</div>
+			
+			<div class="form-group" *ngIf="type == 'senator' && (whipper === undefined || !whipper.id)">
+				<label for="">Nombre *</label>
+				<ng-select [items]="senators"
+									 [active]="currentSenator" 
+		              (selected)="selectedSenator($event)"
+		              placeholder="Selecciona un Senador">
+ 				</ng-select>
+			</div>
+
+			<div class="form-group" *ngIf="type != 'senator'">
+				<label for="">Nombre *</label>
+				<input type="email" name="email" [(ngModel)]="form.fullname">
+			</div>
+
+			<div class="form-group" *ngIf="type != 'senator'">
+				<label for="">Correo Electrónico *</label>
+				<input type="email" name="email" [(ngModel)]="form.email">
+			</div>
+
+			<div class="form-group" *ngIf="type == 'senator' && this.whipper !== undefined && this.whipper.id">
+				<p>Nombre: {{ whipper.fullname }}</p>
+				<p>Correo Electrónico: {{ whipper.email }}</p>
+				<p>Fecha de nacimiento: <ng-container *ngIf="whipper.birthdate">{{ whipper.birthdate | date:'d/MM/y' }}</ng-container> <ng-container *ngIf="!whipper.birthdate">- - -</ng-container></p>
+				<p>Genero: <ng-container *ngIf="whipper.gender">{{ whipper.gender.label }}</ng-container> <ng-container *ngIf="!whipper.gender">- - -</ng-container></p>
+			</div>
+
+			<div class="form-group">
+				<label for="">Cargo *</label>
+				<ng-select [items]="levels"
+									 [active]="currentLevel" 
+		              (selected)="selectedLevel($event)"
+		              placeholder="Selecciona un Cargo">
+ 				</ng-select>
+			</div>
+			<div class="form-group" *ngIf="type == 'other'">
+				<label for="">Departamento *</label>
+				<ng-select [items]="departments"
+									 [active]="currentDepartment" 
+		              (selected)="selectedDepartment($event)"
+		              placeholder="Selecciona un Departamento">
+ 				</ng-select>
+			</div>
+			<div class="form-group2" *ngIf="type == 'other'">
+				<label for="">Genero *</label>
+				<select [(ngModel)]="form.gender_id" name="gender_id">
+					<option value="" disabled="" selected="">Genero</option>
+					<option value="1">Masculino</option>
+					<option value="2">Femenino</option>
+				</select>
+			</div>
+			<div class="form-group2" *ngIf="type == 'other'">
+				<label for="">Fecha de Nacimiento</label>
+				<dp-date-picker style="float: left;" [(ngModel)]="form.birthdate" name="birthdate" (ngModelChange)="form.birthdate = $event" [config]="config" theme="dp-material"></dp-date-picker>
+				<span class="icon-calendar" style="position:relative;top: 32px;left: 5px;"></span>
+				<!-- <input type="date" class="icon" [ngModel]="form.birthdate | date:'yyyy-MM-dd'" (ngModelChange)="form.birthdate = $event"><span class="icon-calendar"></span> -->
+			</div>
+
+			<div class="clearfix"></div>
+			
+			<div class="form-group" *ngIf="type == 'other'">
+				<label for="">Comisión*</label>
+				<ng-select [items]="commissions"
+									 [active]="currentCommission" 
+		              (selected)="selectedCommission($event)"
+		              placeholder="Selecciona un Comisión">
+ 				</ng-select>
+			</div>
+
+		</div>
+		<div class="form-footer">
+			<button type="button" class="btn btn-cancelled" (click)="fadeOut('whippersNew')">Cancelar</button>
+			<button type="button" class="btn btn-accepted" [disabled]="isDisabled()" (click)="save()">
+				<ng-container *ngIf="this.whipper == undefined || !this.whipper.id">	Crear</ng-container>
+				<ng-container *ngIf="this.whipper !== undefined && this.whipper.id">	Editar</ng-container>
+			</button>
+		</div>
+	</div>
+</div>

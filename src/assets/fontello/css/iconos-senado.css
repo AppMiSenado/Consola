@@ -1,0 +1,101 @@
+@font-face {
+  font-family: 'iconos-senado';
+  src: url('../font/iconos-senado.eot?19497650');
+  src: url('../font/iconos-senado.eot?19497650#iefix') format('embedded-opentype'),
+       url('../font/iconos-senado.woff2?19497650') format('woff2'),
+       url('../font/iconos-senado.woff?19497650') format('woff'),
+       url('../font/iconos-senado.ttf?19497650') format('truetype'),
+       url('../font/iconos-senado.svg?19497650#iconos-senado') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'iconos-senado';
+    src: url('../font/iconos-senado.svg?19497650#iconos-senado') format('svg');
+  }
+}
+*/
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "iconos-senado";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-chart:before { content: '\e800'; } /* '' */
+.icon-agenda:before { content: '\e801'; } /* '' */
+.icon-comisiones-02:before { content: '\e802'; } /* '' */
+.icon-voice:before { content: '\e803'; } /* '' */
+.icon-arrow:before { content: '\e804'; } /* '' */
+.icon-bell:before { content: '\e805'; } /* '' */
+.icon-envelope:before { content: '\e806'; } /* '' */
+.icon-vote:before { content: '\e807'; } /* '' */
+.icon-check:before { content: '\e808'; } /* '' */
+.icon-star:before { content: '\e809'; } /* '' */
+.icon-cancel:before { content: '\e80a'; } /* '' */
+.icon-back:before { content: '\e80b'; } /* '' */
+.icon-next:before { content: '\e80c'; } /* '' */
+.icon-check-circled:before { content: '\e80d'; } /* '' */
+.icon-BarMenu:before { content: '\e80e'; } /* '' */
+.icon-calendar:before { content: '\e80f'; } /* '' */
+.icon-clock:before { content: '\e810'; } /* '' */
+.icon-location:before { content: '\e811'; } /* '' */
+.icon-picture:before { content: '\e812'; } /* '' */
+.icon-link:before { content: '\e813'; } /* '' */
+.icon-info:before { content: '\e814'; } /* '' */
+.icon-go:before { content: '\e815'; } /* '' */
+.icon-stop:before { content: '\e816'; } /* '' */
+.icon-stand:before { content: '\e817'; } /* '' */
+.icon-vote-no:before { content: '\e818'; } /* '' */
+.icon-vote-yet:before { content: '\e819'; } /* '' */
+.icon-telephone:before { content: '\e81a'; } /* '' */
+.icon-twitter:before { content: '\e81b'; } /* '' */
+.icon-face:before { content: '\e81c'; } /* '' */
+.icon-absent:before { content: '\e81d'; } /* '' */
+.icon-search:before { content: '\e81e'; } /* '' */
+.icon-senado:before { content: '\e81f'; } /* '' */
+.icon-present:before { content: '\e820'; } /* '' */
+.icon-cancel-circled:before { content: '\e821'; } /* '' */
+.icon-pencil:before { content: '\e822'; } /* '' */
+.icon-comisiones:before { content: '\e823'; } /* '' */
+.icon-home:before { content: '\e824'; } /* '' */
+.icon-vcard:before { content: '\e825'; } /* '' */
+.icon-flag:before { content: '\e826'; } /* '' */
+.icon-trash:before { content: '\e827'; } /* '' */
+.icon-tags:before { content: '\e828'; } /* '' */
+.icon-session:before { content: '\e829'; } /* '' */
+.icon-whipper:before { content: '\e82a'; } /* '' */
+.icon-users:before { content: '\f064'; } /* '' */

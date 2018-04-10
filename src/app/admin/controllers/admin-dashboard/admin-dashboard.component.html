@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<section class="container">
+<div class="row">
+    <article class="col-sm-2">
+    <app-sidebar></app-sidebar>
+</article>
+<article class="col-sm-10">
+    <div class="col-sm-12 row">
+        <div class="title col-sm-12">Dashboard</div>
+        <div class="col-sm-9">
+            <button type="button" [class.active]="view == 'sessions'" (click)="view = 'sessions'" class="btn btn-accepted btn-xs">Sesiones</button>
+            <button type="button" [class.active]="view == 'senators'" (click)="view = 'senators'" class="btn btn-accepted btn-xs">Senadores</button>
+        </div>
+    </div>
+    <div class="col-sm-12 row module" *ngIf="view === 'sessions'">
+        <sessions-list></sessions-list>
+    </div>
+    <div class="col-sm-12 row module" *ngIf="view === 'senators'">
+        <senators-list></senators-list>
+    </div>
+</article>
+</div>
+</section>

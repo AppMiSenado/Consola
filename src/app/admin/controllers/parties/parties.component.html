@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+<section class="container">
+<div class="row">
+	<article class="col-sm-2">
+	<app-sidebar></app-sidebar>
+</article>
+<article class="col-sm-10">
+	<div class="col-sm-12 row">
+		<div class="title col-sm-12">Partidos</div>
+	</div>
+	<div class="col-sm-12">
+		<div class="col-sm-8">
+			<button type="button" class="btn btn-accepted btn-xs" (click)="party = {}; fadeIn('partiesNew');">Nuevo</button>
+		</div>
+		<div class="col-sm-4 text-right">
+			<div class="search2">
+				<div class="item-group">
+					<span class="item-addon"><i class="icon-search" aria-hidden="true"></i></span>
+					<input type="text" [(ngModel)]="filtered">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<ul class="table2">
+			<li>
+				<div class="table-head col-sm-12 text-left">
+					<div class="col-sm-1">Logo</div>
+					<div class="col-sm-9">Nombre</div>
+					<div class="col-sm-1">Editar</div>
+					<div class="col-sm-1">Eliminar</div>
+				</div>
+			</li>
+			<div class="body-table white-bg">
+				<li *ngFor="let party of parties | filterBy:{name: filtered}">
+					<div class="table-row col-sm-12">
+						<div class="col-sm-1" align="center">
+							<span>
+								<div class="logo">
+									<img [src]="party.image">
+								</div>
+							</span>
+						</div>
+						<div class="col-sm-9">{{ party.name }}</div>
+						<div class="col-sm-1" align="center">
+               <a class="button" (click)="update(party.id);">
+                 <i class="icon-pencil button" aria-hidden="true"></i>
+               </a>
+             </div>
+             <div class="col-sm-1 text-center">
+               <a class="button" data-toggle="modal" data-target="#modal-delete" href="#modal-delete" (click)="party_id = party.id">
+                <i class="icon-trash" aria-hidden="true"></i>
+              </a>
+             </div>
+					</div>
+				</li>
+			</div>
+		</ul>
+	</div>
+</article>
+</div>
+</section>
+<modal-delete [id]="party_id" (emmiterAccept)="delete()"></modal-delete>
+<parties-new [party]="party" (emmiteParty)="store($event)"></parties-new>

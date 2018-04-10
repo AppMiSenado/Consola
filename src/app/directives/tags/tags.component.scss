@@ -1,0 +1,37 @@
+$gold  : #B59E54 !default;
+$grey  : #EFEFEF !default;
+$white : #FFFFFF !default;
+
+.ng2-uberflug-tags{
+  background-color : $grey;
+  display : blocked;
+  padding : 1em;
+
+  input[type=text]{
+    background-color : $grey;
+    border           : none;
+    padding          : 0px 0.5em;
+    height           : 30px;
+
+    &:focus{
+      outline: none;
+    }
+  }
+
+  span{
+    color  : $white;
+    background-color : $gold;
+    border-radius    : 5em;
+    cursor           : default;
+    display          : inline-block;
+    font-size        : 0.8em;
+    margin           : 0.25em;
+    padding          : 0.5em;
+
+    i{
+      color  : $white;
+      cursor : pointer;
+    }
+  }
+
+}

@@ -1,0 +1,36 @@
+<div class="login">
+  <div class="box">
+    <div class="form">
+
+      <div class="form-container">
+        <div class="title">
+          <span class="label">Bienvenido a</span>
+          <span class="appname futura-bold">Mi Senado App</span>
+        </div>
+
+        <div>
+          <form novalidate #formLogin="ngForm" (ngSubmit)="logme()">
+            <div class="form-group">
+              <label for="">Correo electrónico</label>
+              <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+            </div>
+            <div class="form-group">
+              <label for="">Contraseña</label>
+              <input type="password" minlength="6" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" [disabled]="!formLogin.valid" class="btn btn-accepted btn-block">Entrar</button>
+            </div>
+            <div class="text-center padding">
+              <a class="label" data-toggle="modal" data-target="#modal-reset-password" href="#modal-reset-password">¿Olvidó su contraseña?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<modal-reset-password></modal-reset-password>
